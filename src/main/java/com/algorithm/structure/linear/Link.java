@@ -10,6 +10,9 @@ public class Link {
     private long data;
     private Link next;
 
+    public Link() {
+    }
+
     public Link(long data) {
         this.data = data;
     }
