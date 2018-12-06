@@ -7,6 +7,7 @@ import org.junit.Test;
  * 线性表 链式存储
  *
  * 增  删 查
+ * 头插法
  * @author limeng
  * @create 2018-12-05 下午6:44
  **/
