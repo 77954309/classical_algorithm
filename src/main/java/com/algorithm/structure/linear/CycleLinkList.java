@@ -8,6 +8,9 @@ import org.junit.Test;
  * 跟单链表区别判断链表结尾
  *
  * 约瑟夫循环链表 josephRemove
+ *
+ * //判断是否有环 快慢指针
+ *
  * @author limeng
  * @create 2018-12-06 下午3:31
  **/
@@ -125,14 +128,14 @@ public class CycleLinkList {
 
     @Test
     public void init(){
-        /*this.initList();
+        this.initList();
         this.insert(1);
         this.insert(2);
         this.insert(3);
         this.insert(4);
         this.insert(11,2);
 
-
+/*
         this.remove(11);*/
 
        /* //约瑟夫循环链表
