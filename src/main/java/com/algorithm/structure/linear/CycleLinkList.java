@@ -77,6 +77,25 @@ public class CycleLinkList {
 
     }
 
+    /**
+     * 按位置修改
+     * @param data
+     * @param pos
+     */
+    protected void update(long data,long pos){
+        Link tmp=first;
+        if(pos > 0){
+            for (int i = 0; i < pos-1; i++) {
+                tmp = tmp.getNext();
+                if(tmp == first){
+                    tmp = tmp.getNext();
+                }
+            }
+            tmp.getNext().setData(data);
+        }
+    }
+
+
     protected int linkLength(Link link){
         int length=0;
         Link tmp=link;
@@ -114,6 +133,40 @@ public class CycleLinkList {
         }
     }
 
+    /**
+     **问题名称：魔术师发牌问题
+     *问题描述：魔术师手里一共有13张牌，全是黑桃，1~13.
+     *********魔术师需要实现一个魔术：这是十三张牌全部放在桌面上（正面向下），
+     ********第一次摸出第一张，是1，翻过来放在桌面上。
+     ******第二次摸出从上往下数第二张，是2，翻过来 放在桌面上，（第一张放在最下面去，等会儿再摸），
+     *****第三次摸出从上往下数第三张，是3，翻过来放在桌面上，（第一张和第二张 放在最下面去，等会儿再摸）
+     ***  以此类推 最后一张就是13
+     *
+     * 方法：
+     * 1、创建一个长度为13的单向循环链表，链表中值全部存0
+     * 2、遍历链表进行修改值
+     */
+    protected void magicUpdateLinkList(){
+        Link tmp = first;
+        tmp.getNext().setData(1);
+
+        for (int i = 2; i <= 13; i++) {
+            for (int j=0; j < i; j++) {
+                tmp = tmp.getNext() ;
+                if(tmp == first){
+                    tmp = tmp.getNext() ;
+                }
+                if(tmp.getData() != 0 ){
+                    j--;
+                }
+            }
+            tmp.setData(i);
+        }
+        this.displayAll();
+
+    }
+
+
 
     /**
      * 显示
@@ -129,21 +182,13 @@ public class CycleLinkList {
     @Test
     public void init(){
         this.initList();
-        this.insert(1);
+        /*this.insert(1);
         this.insert(2);
         this.insert(3);
-        this.insert(4);
-        this.insert(11,2);
+        this.insert(4);*/
 
-/*
-        this.remove(11);*/
-
-       /* //约瑟夫循环链表
-        this.initList();
-        for (int i = 0; i < 41; i++) {
-            this.insert(i+1);
-        }
-        this.josephRemove();*/
+        //this.update(22,3);
+        //this.remove(11);
 
         this.displayAll();
     }
