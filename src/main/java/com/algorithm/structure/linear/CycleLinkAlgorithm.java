@@ -51,6 +51,24 @@ public class CycleLinkAlgorithm {
         cycleLinkList.magicUpdateLinkList();
     }
 
+    /**
+     * 拉丁方阵
+     * n*n阶方阵
+     * 每行和每列数值不同
+     */
+    @Test
+    public void latinPhalanx(){
+        int n=4;
+        for (int j = 0; j < n; j++) {
+            int t=j%n;
+            for (int k = 0; k < n; k++) {
+                int r=(k+t)%n+1;
+                System.out.print(r+" ");
+            }
+
+            System.out.println();
+        }
+    }
 
 
 }

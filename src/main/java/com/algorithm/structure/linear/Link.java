@@ -32,4 +32,6 @@ public class Link {
     public void setNext(Link next) {
         this.next = next;
     }
+
+
 }
