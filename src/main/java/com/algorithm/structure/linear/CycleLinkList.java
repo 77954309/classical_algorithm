@@ -181,10 +181,10 @@ public class CycleLinkList {
     @Test
     public void init(){
         this.initList();
-        /*this.insert(1);
+        this.insert(1);
         this.insert(2);
         this.insert(3);
-        this.insert(4);*/
+        this.insert(4);
 
         //this.update(22,3);
         //this.remove(11);
