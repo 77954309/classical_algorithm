@@ -33,10 +33,13 @@ public class Recursion {
     }
 
     /**
+     * 回溯指针
      * 测试数据
      * ABAB
      * 不加 p[++j] == p[++k]  -1 0 0 1   j:1 j:0 j:-1
      * -1 0 -1 0   j:0 j:-1
+     *
+     *  p[++j] == p[++k]  next[j] = next[k]; P[j] == P[next[j]]
      * @param ps
      * @return
      */
