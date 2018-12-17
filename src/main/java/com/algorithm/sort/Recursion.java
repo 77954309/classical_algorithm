@@ -66,16 +66,39 @@ public class Recursion {
                     }
                     //next[++j] = ++k;
                 } else {
-
                     k = next[k];
-
                 }
              }
          return next;
     }
 
 
+    /**
+     *
+     * 当T[i] != P[j]时
 
+      有T[i-j ~ i-1] == P[0 ~ j-1]
+
+      由P[0 ~ k-1] == P[j-k ~ j-1]
+
+      必然：T[i-k ~ i-1] == P[0 ~ k-1]
+
+     当P[k] == P[j]时，
+
+     有next[j+1] == next[j] + 1
+
+     因为在P[j]之前已经有P[0 ~ k-1] == p[j-k ~ j-1]。（next[j] == k）
+
+     这时候现有P[k] == P[j]，我们是不是可以得到P[0 ~ k-1] + P[k] == p[j-k ~ j-1] + P[j]。
+
+     即：P[0 ~ k] == P[j-k ~ j]，即next[j+1] == k + 1 == next[j] + 1。
+     *
+     *
+     *
+     * @param ts
+     * @param ps
+     * @return
+     */
     public  int KMP(String ts, String ps) {
         
          char[] t = ts.toCharArray();
@@ -127,8 +150,8 @@ public class Recursion {
         String ps="ABAB";
         int kmp = this.KMP(ts, ps);
         System.out.println(kmp);
-        int[] next=this.getNext(ps);
-        System.out.println(next);
+        /*int[] next=this.getNext(ps);
+        System.out.println(next);*/
     }
 
 
