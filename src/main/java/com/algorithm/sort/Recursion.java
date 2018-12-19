@@ -74,6 +74,7 @@ public class Recursion {
 
 
     /**
+     * KMP模式匹配
      *
      * 当T[i] != P[j]时
 
@@ -82,6 +83,7 @@ public class Recursion {
       由P[0 ~ k-1] == P[j-k ~ j-1]
 
       必然：T[i-k ~ i-1] == P[0 ~ k-1]
+
 
      当P[k] == P[j]时，
 
