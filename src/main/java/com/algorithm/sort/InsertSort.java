@@ -33,7 +33,7 @@ public class InsertSort extends Example {
 
     @Test
     public void init(){
-        Comparable[] a={1,10,3,2};
+        Comparable[] a={1,10,3,2,40,60,50,5};
         this.sort(a);
         this.show(a);
     }

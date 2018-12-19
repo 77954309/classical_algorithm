@@ -99,16 +99,32 @@ public class LinkList {
 
     }
 
+
+    public Link show(){
+        return this.first;
+    }
+
     @Test
     public void init(){
         this.insert(1);
+        this.insert(2);
         this.insert(3);
         this.insert(4);
-        this.insert(2,2);
-        this.remove(4);
-        Link link = this.find(1);
+        //this.insert(2,2);
+        /*this.remove(4);
+        Link link = this.find(1);*/
 
         this.displayAll();
+    }
+
+    public void hannoTowerInit(){
+        this.insert(1);
+        this.insert(2);
+        this.insert(3);
+        this.insert(4);
+
+        this.displayAll();
+        System.out.println("-------------------------");
     }
 
 

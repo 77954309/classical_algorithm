@@ -38,7 +38,7 @@ public abstract class Example {
 
     protected void show(Comparable[] a){
         for (int i = 0; i < a.length; i++) {
-            System.out.println(a[i]+" ");
+            System.out.print(a[i]+" ");
         }
         System.out.println();
     }
