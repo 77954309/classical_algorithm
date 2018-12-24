@@ -37,22 +37,20 @@ public class MergerSort extends Example {
     /**
      * 归并
      * 自底向上
-     * @param a
-     * @param lo
-     * @param hi
+     *
      */
-    protected void sortUp(Comparable[] a,int lo,int hi){
+    protected void sortUp(Comparable[] a){
         int length = a.length;
+        aux = new Comparable[length];
 
-
-        for (int i = lo; i <= hi; i++) {
-            //int mid = i + (hi - lo)/2;
-            /*for (int j = i+1; j < ; j++) {
-
-            }*/
+        for (int i = 1; i < length; i+=i) {
+            for (int j = 0; j < length-i; j+=i+i) {
+                this.merge(a,j,j+i-1,Math.min(j+i+i-1,length-1));
+            }
         }
-
     }
+
+
 
 
 
@@ -98,7 +96,11 @@ public class MergerSort extends Example {
     @Test
     public void init(){
         Comparable[] a={10,40,30,2};
-        this.sort(a);
+        /*this.sort(a);
+        this.show(a);*/
+
+
+        this.sortUp(a);
         this.show(a);
     }
 
