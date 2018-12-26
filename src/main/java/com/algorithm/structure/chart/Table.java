@@ -2,57 +2,83 @@ package com.algorithm.structure.chart;
 
 /**
  *
- *
+ * 邻接矩阵
  * @author limeng
  * @create 2018-12-25 下午4:46
  **/
 public class Table {
-    private String key;
-    private String weight;
-    private String value;
+    private String data;
+    private TableData tableData;
 
-    private Table leftTable;
-    private Table rightTable;
-
-    public Table(String key, String value) {
-        this.key = key;
-        this.value = value;
+    public Table() {
     }
 
-    public String getKey() {
-        return key;
+    public Table(String data) {
+        this.data = data;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public String getData() {
+        return data;
     }
 
-    public String getValue() {
-        return value;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public TableData getTableData() {
+        return tableData;
     }
 
-    public Table getLeftTable() {
-        return leftTable;
+    public void setTableData(TableData tableData) {
+        this.tableData = tableData;
     }
 
-    public void setLeftTable(Table leftTable) {
-        this.leftTable = leftTable;
+
+
+    @Override
+    public String toString() {
+        return "Table{" + "data='" + data + '\'' + '}';
+    }
+}
+class TableData{
+    private int adjvex;//弧尾index
+    private int weight;//权值
+    private TableData next;
+
+    public TableData() {
     }
 
-    public Table getRightTable() {
-        return rightTable;
+    public TableData(int adjvex, int weight) {
+        this.adjvex = adjvex;
+        this.weight = weight;
     }
 
-    public void setRightTable(Table rightTable) {
-        this.rightTable = rightTable;
+    public int getAdjvex() {
+        return adjvex;
+    }
+
+    public void setAdjvex(int adjvex) {
+        this.adjvex = adjvex;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public TableData getNext() {
+        return next;
+    }
+
+    public void setNext(TableData next) {
+        this.next = next;
     }
 
     @Override
     public String toString() {
-        return "Table{" + "key='" + key + '\'' + ", value='" + value + '\'' + '}';
+        return "TableData{" + "adjvex=" + adjvex + ", weight=" + weight + '}';
     }
 }
