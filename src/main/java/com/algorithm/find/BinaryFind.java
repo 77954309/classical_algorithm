@@ -8,7 +8,9 @@ import org.junit.Test;
  * 1.查找第一个值等于给定值的元素
  * 2.查找最后一个值等于给定值的元素
  * 3.查找第一个大于等于给定值的元素
- * 4.
+ * 4.查找最后一个小于等于给定值元素
+ *
+ * 处理相似范围的查找有优势
  * @Author: limeng
  * @Date: 2019/7/24 20:31
  */
@@ -56,6 +58,7 @@ public class BinaryFind  {
         int hi=n;
         int mid = 0;
         while (lo <= hi){
+            //为了数组越界
             mid = lo+((hi-lo)>>1);
             if(a[mid] > value){
                 hi = mid - 1;
@@ -66,6 +69,86 @@ public class BinaryFind  {
                 else hi = mid - 1;
             }
 
+        }
+        return -1;
+    }
+
+    /**
+     *查找第一个大于等于给定值的元素
+     * @param a
+     * @param n
+     * @param value
+     * @return
+     */
+    public int binaryByFirstBig(int[] a,int n,int value){
+        int lo=0;
+        int hi=n;
+        int mid = 0;
+        while (lo <= hi){
+            //为了数组越界
+            mid = lo+((hi-lo)>>1);
+            if(a[mid] >= value){
+                if((mid == 0) || a[mid-1] < value){
+                    return mid;
+                }else {
+                    hi = mid -1;
+                }
+            }else {
+                lo = mid +1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 查找最后一个值等于给定值的元素
+     * @param a
+     * @param n
+     * @param value
+     * @return
+     */
+    public int binaryByEnd(int[] a,int n,int value){
+        int lo=0;
+        int hi=n;
+        int mid = 0;
+        while (lo <= hi){
+            mid = lo+((hi-lo)>>1);
+            if(a[mid] > value){
+                hi = mid - 1;
+            }else if(a[mid] < value){
+                lo=mid+1;
+            }else{
+                if((mid == n) || (a[mid + 1] != value)) return mid;
+                else lo = mid + 1;
+            }
+
+        }
+        return -1;
+    }
+
+
+    /**
+     *查找最后一个小于等于给定值的元素
+     * @param a
+     * @param n
+     * @param value
+     * @return
+     */
+    public int binaryByEndBig(int[] a,int n,int value){
+        int lo = 0;
+        int hi = n;
+        int mid = 0;
+        while (lo <= hi){
+            mid = lo+((hi-lo)>>1);
+            if(a[mid] <= value){
+                if(mid == n || a[mid] > value){
+                    return mid;
+                }else{
+                    lo = mid+1;
+                }
+            }else {
+                hi = mid -1;
+            }
         }
         return -1;
     }
@@ -92,8 +175,13 @@ public class BinaryFind  {
     }
     @Test
     public void init(){
-        int[] a ={1,29,45,67,89,177};
-        binary(a,45);
+        int[] a ={1,23,25,67,67,67,70,71,72};
+        //binary(a,45);
+        //int mid = binaryByFirst(a, a.length-1, 67);
+        //int mid = binaryByEnd(a, a.length-1, 67);
+        //int i = binaryByFirstBig(a, a.length - 1, 67);
+        int i = binaryByEndBig(a, a.length - 1, 1);
+        System.out.printf("mid "+i+"\n");
     }
 
 
