@@ -1,6 +1,5 @@
 package com.algorithm.structure.hash;
 
-import scala.collection.mutable.Node;
 
 import java.io.Serializable;
 import java.util.AbstractMap;

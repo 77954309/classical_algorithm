@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * 拉链法
- *
+ * hash法
  * https://blog.csdn.net/qq_35580883/article/details/79150509
  * @Author: limeng
  * @Date: 2019/8/7 20:43
