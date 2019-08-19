@@ -1,5 +1,7 @@
 package com.algorithm.structure.linear;
 
+import org.junit.Test;
+
 /**
  * lru 链表
  * 热点读取
@@ -13,12 +15,31 @@ package com.algorithm.structure.linear;
  */
 public class LruList {
     private NodeList first;
-    private NodeList tail;
 
-    public void addHead(){
 
+    /**
+     * 头插
+     * @param value
+     */
+    public void addHead(String  value){
+        NodeList nodeList = new NodeList(value);
+        if(first == null){
+            first = nodeList;
+        }else{
+            first.setFirst(nodeList);
+            nodeList.setTail(first);
+
+        }
+        first = nodeList;
     }
 
+
+
+
+
+    /**
+     * 尾插
+     */
     public void addTail(){
 
     }
@@ -31,11 +52,29 @@ public class LruList {
 
     }
 
+    public void print(){
+        System.out.println(first);
+    }
+
+    @Test
+    public void init(){
+        first = new NodeList(null);
+        this.addHead("1");
+        this.addHead("2");
+        this.addHead("3");
+        this.addHead("4");
+        this.print();
+    }
+
 }
 class NodeList{
     private String data;
     private NodeList first;
     private NodeList tail;
+
+    public NodeList(String data) {
+        this.data = data;
+    }
 
     public String getData() {
         return data;
