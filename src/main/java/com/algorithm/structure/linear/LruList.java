@@ -15,8 +15,9 @@ import org.junit.Test;
  */
 public class LruList {
     private NodeList first;
-
-
+    private NodeList last;
+    private int size;
+    private int capacity=3;
     /**
      * 头插
      * @param value
@@ -24,46 +25,134 @@ public class LruList {
     public void addHead(String  value){
         NodeList nodeList = new NodeList(value);
         if(first == null){
-            first = nodeList;
+            last = nodeList;
         }else{
             first.setFirst(nodeList);
-            nodeList.setTail(first);
-
         }
+        nodeList.setTail(first);
         first = nodeList;
+        size ++;
     }
 
+    /**
+     * 去除尾节点
+     */
+    public void deleteByTail(){
+        NodeList nodeList = last;
+        if(first.getTail() == null){
+            last = null;
+            first = null;
+        }else{
+            nodeList.getFirst().setTail(null);
+        }
+        last=nodeList.getFirst();
+        size ++;
+    }
 
+    /**
+     * 删除指定值
+     * @param value
+     */
+    public boolean deleteByValue(String value){
+        NodeList tmp = first;
+        if(first == null){
+            return false;
+        }
+        while (!tmp.getData().equals(value)){
+            if(tmp.getTail() == null){
+                return false;
+            }else{
+                tmp = tmp.getTail();
+            }
+        }
+        if(tmp == first){
+            first = first.getTail();
+        }else{
+            tmp.getFirst().setTail(tmp.getTail());
+            tmp.getTail().setFirst(tmp.getFirst());
+        }
+        size--;
+        return true;
+    }
 
+    public NodeList find(String value){
+        NodeList tmp = first;
+        if(first == null){
+            return null;
+        }
+        while (!tmp.getData().equals(value)){
+            if(tmp.getTail() == null){
+                return null;
+            }else{
+                tmp = tmp.getTail();
+                return tmp;
+            }
+        }
+        return null;
+    }
+    public void lruByAddHead(String value){
+        NodeList node = this.find(value);
+        /**
+         * 数据在lru中
+         */
+        if(node != null){
+            /**
+             * 先删除value
+             * 然后插入头
+             */
+            this.deleteByValue(value);
+            this.addHead(value);
+        }else{
+            //未满，插入头
+            if(size <capacity){
+                this.addHead(value);
+            }else{
+                //已经满，删除尾部
+                this.deleteByTail();
+                //插入头
+                this.addHead(value);
+            }
+        }
 
+    }
+
+    public void lru(){
+
+    }
 
     /**
      * 尾插
      */
-    public void addTail(){
-
+    public void addTail(String value){
+        NodeList nodeList = new NodeList(value);
+        if(last == null){
+            first = nodeList;
+        }else{
+            last.setTail(nodeList);
+        }
+        nodeList.setFirst(last);
+        last = nodeList;
     }
 
-    public void addAfter(){
 
-    }
-
-    public void remove(){
-
-    }
 
     public void print(){
         System.out.println(first);
+        System.out.println(last);
     }
 
     @Test
     public void init(){
-        first = new NodeList(null);
-        this.addHead("1");
+        //基础测试
+        /*this.addHead("1");
         this.addHead("2");
         this.addHead("3");
         this.addHead("4");
         this.print();
+        this.deleteByValue("3");
+        this.print();*/
+
+        //
     }
 
 }
