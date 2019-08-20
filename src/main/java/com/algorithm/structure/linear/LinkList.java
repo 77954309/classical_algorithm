@@ -87,6 +87,25 @@ public class LinkList {
        }
     }
 
+
+    public void reverseListNode(){
+        Link current = first;
+        if(current == null || current.getNext() == null){
+            return;
+        }
+
+        Link pre=null;
+        Link next=null;
+
+        while (current != null){
+            next = current.getNext();
+            current.setNext(pre);
+            pre = current;
+            current = next;
+        }
+        System.out.println(pre);
+    }
+
     /**
      * 显示
      */
@@ -115,6 +134,7 @@ public class LinkList {
         Link link = this.find(1);*/
 
         this.displayAll();
+        this.reverseListNode();
     }
 
     public void hannoTowerInit(){

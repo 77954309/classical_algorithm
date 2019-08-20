@@ -31,7 +31,7 @@ public class LruList {
         }
         nodeList.setTail(first);
         first = nodeList;
-        size ++;
+
     }
 
     /**
@@ -46,7 +46,6 @@ public class LruList {
             nodeList.getFirst().setTail(null);
         }
         last=nodeList.getFirst();
-        size ++;
     }
 
     /**
@@ -71,7 +70,6 @@ public class LruList {
             tmp.getFirst().setTail(tmp.getTail());
             tmp.getTail().setFirst(tmp.getFirst());
         }
-        size--;
         return true;
     }
 
@@ -85,10 +83,9 @@ public class LruList {
                 return null;
             }else{
                 tmp = tmp.getTail();
-                return tmp;
             }
         }
-        return null;
+        return tmp;
     }
     public void lruByAddHead(String value){
         NodeList node = this.find(value);
@@ -106,6 +103,7 @@ public class LruList {
             //未满，插入头
             if(size <capacity){
                 this.addHead(value);
+                size ++;
             }else{
                 //已经满，删除尾部
                 this.deleteByTail();
@@ -113,7 +111,6 @@ public class LruList {
                 this.addHead(value);
             }
         }
-
     }
 
     public void lru(){
@@ -153,6 +150,12 @@ public class LruList {
         this.print();*/
 
         //
+        this.lruByAddHead("1");
+        this.lruByAddHead("2");
+        this.lruByAddHead("3");
+        this.lruByAddHead("4");
+        this.lruByAddHead("3");
+        this.print();
     }
 
 }
