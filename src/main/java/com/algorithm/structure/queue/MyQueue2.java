@@ -1,6 +1,10 @@
 package com.algorithm.structure.queue;
 
+import org.junit.Test;
+
 /**
+ * https://blog.csdn.net/YPJMFC/article/details/78246971
+ * 位运算
  * @Author: limeng
  * @Date: 2019/8/28 10:45
  */
@@ -10,6 +14,7 @@ public class MyQueue2 {
     //head表示队头下表，tail表示队尾下标
     private int head=0;
     private int tail=0;
+
 
     /**
      * 申请一个大小capacity数组
@@ -44,5 +49,40 @@ public class MyQueue2 {
         return item;
     }
 
+    /**
+     * 循环队列
+     * 入队
+     * @param item 值
+     */
+    public void cycleEnqueue(String item){
+        if(((tail+1) & (n-1)) == head){
+            return;
+        }
+        items[tail] = item;
+        tail = (tail+1) & (n-1);
+    }
 
+    /**
+     * 循环出队
+     * 出队
+     */
+    public String cycleDequeue(){
+        if(head == tail) return null;
+        String item = items[head];
+        head = (head+1)&(n-1);
+        return item;
+    }
+    @Test
+    public void init(){
+
+    }
+
+    public static void main(String[] args) {
+        MyQueue2 myQueue2 = new MyQueue2(4);
+        myQueue2.cycleEnqueue("1");
+        myQueue2.cycleEnqueue("2");
+        myQueue2.cycleEnqueue("3");
+        myQueue2.cycleEnqueue("4");
+        myQueue2.cycleEnqueue("5");
+    }
 }
