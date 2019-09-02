@@ -78,7 +78,7 @@ public class MyQueue2 {
     }
 
     public static void main(String[] args) {
-        MyQueue2 myQueue2 = new MyQueue2(4);
+        MyQueue2 myQueue2 = new MyQueue2(3);
         myQueue2.cycleEnqueue("1");
         myQueue2.cycleEnqueue("2");
         myQueue2.cycleEnqueue("3");

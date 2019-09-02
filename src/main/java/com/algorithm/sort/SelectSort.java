@@ -13,6 +13,7 @@ import org.junit.Test;
  **/
 public class SelectSort extends Example {
 
+    @Override
     protected void sort(Comparable[] a) {
         int length=a.length;
         for (int i = 0; i < length; i++) {
