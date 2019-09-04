@@ -67,4 +67,24 @@ public class SortTest  {
        }
        Assert.assertNotNull(a);
    }
+   @Test
+   public void  merger(){
+
+   }
+
+   public void mergerSortC(int[] a,int start,int end){
+       if(end <= start) return;
+
+       int mid = start + (end - start)/2;
+
+
+   }
+
+   public void mergerSort(int[] a,int start,int mid,int end){
+
+   }
+
+
+
+
 }
