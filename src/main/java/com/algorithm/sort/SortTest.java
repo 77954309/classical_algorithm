@@ -67,20 +67,111 @@ public class SortTest  {
        }
        Assert.assertNotNull(a);
    }
+
    @Test
    public void  merger(){
+        int[] a=new int[]{23,45,67,89,21};
+       mergerSortC1(a,0,a.length-1);
+       Assert.assertNotNull(a);
 
    }
 
-   public void mergerSortC(int[] a,int start,int end){
-       if(end <= start) return;
-
+    /**
+     * merge_sort(p-r) = merger(merge_sort(p-q),merge_sort(q+1...r))
+     * @param a
+     * @param start
+     * @param end
+     */
+   public void mergerSortC1(int[] a,int start,int end){
+       if(start >= end) return;
        int mid = start + (end - start)/2;
 
+       mergerSortC1(a,start,mid);
+       mergerSortC1(a,mid+1,end);
+
+       mergerSort1(a,start,mid,end);
+   }
+
+
+    /**
+     * 将a[start...mid]和a[mid+1...end]
+     * @param a
+     * @param start
+     * @param mid
+     * @param end
+     */
+   public void mergerSort1(int[] a,int start,int mid,int end){
+       //开始
+       int i = start;
+       //中
+       int j = mid+1;
+       //转存临时数组
+       int k = 0;
+       // i++ 等于 i:=i+1
+       int[] tmp = new int[end - start+1];
+       while (i <= mid && j<=end ){
+           if(a[i] <= a[j]){
+               //i++ 等于 i:=i+1
+               tmp[k++] = a[i++];
+           }else{
+               tmp[k++] = a[j++];
+           }
+       }
+
+
+       //判断哪个子数组中有剩余
+       //左
+       int start2 = i;
+       int end2 = mid;
+       if(j <= end){
+           //右
+           start2 = j;
+           end2 = end;
+       }
+
+       //将剩余的数据拷贝到临时数组tmp
+       while (start2 <= end2){
+           tmp[k++] = a[start2++];
+       }
+
+       for(i=0;i<= end - start;++i){
+           a[start+i] = tmp[i];
+       }
 
    }
 
-   public void mergerSort(int[] a,int start,int mid,int end){
+
+    public void mergerSort2(int[] a,int start,int mid,int end){
+        int i = start;
+        int j = mid+1;
+        int[] tmp=new int[end+1];
+
+        for (int k = i; k < end; k++) {
+            tmp[i] = a[k];
+        }
+
+        /**
+         * 子序列
+         * i 左边用尽，取右边
+         * j 右边用尽，取左边
+         * j i比大小   j小  赋值k数值 ，反之亦然
+         */
+        for (int k = i; k <= end; k++) {
+            if(i > j){
+                //左侧取尽
+                a[k] = tmp[j++];
+            }else if(j > end){
+                a[k] = tmp[i++];
+            }else if(a[i] < a[j]){
+                a[k] = tmp[i];
+            }else{
+                a[k] = tmp[j];
+            }
+        }
+
+    }
+
+   public void quickSort(){
 
    }
 
