@@ -183,7 +183,6 @@ public class SortTest  {
         for (int i = 0; i <= mid - start; i++) {
             leftArrs[i] = a[start+i];
         }
-
     }
 
 
