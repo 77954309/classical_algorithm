@@ -171,6 +171,22 @@ public class SortTest  {
 
     }
 
+    /**
+     * 归并哨兵
+     * 监控边界
+     *
+     */
+    public void mergerSort3(int[] a,int start,int mid,int end){
+        int[] leftArrs = new int[mid - start + 2];
+        int[] rightArrs = new int[end - mid + 2];
+
+        for (int i = 0; i <= mid - start; i++) {
+            leftArrs[i] = a[start+i];
+        }
+
+    }
+
+
    @Test
    public void quickSort(){
        int[] a=new int[]{10,45,17,89,21};
