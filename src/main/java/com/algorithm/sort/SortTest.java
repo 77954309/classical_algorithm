@@ -89,7 +89,7 @@ public class SortTest  {
        mergerSortC1(a,start,mid);
        mergerSortC1(a,mid+1,end);
 
-       mergerSort3(a,start,mid,end);
+       mergerSort1(a,start,mid,end);
    }
 
 
