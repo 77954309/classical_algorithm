@@ -89,7 +89,7 @@ public class SortTest  {
        mergerSortC1(a,start,mid);
        mergerSortC1(a,mid+1,end);
 
-       mergerSort1(a,start,mid,end);
+       mergerSort3(a,start,mid,end);
    }
 
 
@@ -167,6 +167,27 @@ public class SortTest  {
             }else{
                 a[k] = tmp[j];
             }
+        }
+
+    }
+
+    /**
+     * 归并哨兵
+     * 监控边界
+     * 减少while的个数
+     * 减少判断条件
+     * 将范围判断改完不等于
+     * @param a 数组
+     * @param start
+     * @param mid
+     * @param end
+     */
+    public void mergerSort3(int[] a,int start,int mid,int end){
+        int[] leftArr = new int[mid - start +2];
+        int[] rightArr = new int[end - mid +2];
+
+        for (int i = start; i <= mid-start; i++) {
+
         }
 
     }
