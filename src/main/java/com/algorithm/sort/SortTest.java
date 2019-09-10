@@ -183,6 +183,24 @@ public class SortTest  {
         for (int i = 0; i <= mid - start; i++) {
             leftArrs[i] = a[start+i];
         }
+
+        leftArrs[mid-start + 1] = Integer.MAX_VALUE;
+
+        for (int i = 0; i <= end-mid; i++) {
+            rightArrs[i] = a[mid+i];
+        }
+        rightArrs[end - mid + 1] = Integer.MAX_VALUE;
+
+        int i=0;
+        int j=0;
+        int k=start;
+        while (k<=end){
+            if(leftArrs[i] < rightArrs[j]){
+                a[k++] = leftArrs[i++];
+            }else{
+                a[k++] = rightArrs[j++];
+            }
+        }
     }
 
 
