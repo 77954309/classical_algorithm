@@ -179,6 +179,68 @@ public class SortTest2 {
 
     @Test
     public void testCountSort2(){
+        int a[] =new int[]{1,2,2,34,5,6,7,32};
+        int n=a.length;
+
+        // 查找数组中数据范围
+        int max = a[0];
+        for (int i = 0; i < n; i++) {
+            if(max < a[i]){
+                max = a[i];
+            }
+        }
+
+        int[] c=new int[max+1];
+        for (int i = 0; i <=max ; i++) {
+            c[i] = 0;
+        }
+
+        //分桶
+        for (int i = 0; i < n; i++) {
+            c[a[i]]++;
+        }
+        //累加
+        for (int i = 1; i <= max; i++) {
+            c[i] = c[i-1]+c[i];
+        }
+
+        //临时数组r,存储排序之后的结果
+        int[] r = new int[n];
+        for (int i = 0; i < n; i++) {
+            int index=c[a[i]]-1;
+            r[index] = a[i];
+            c[a[i]]--;
+        }
+
+        //将结果拷贝给a数组
+        for (int i = 0; i < n; i++) {
+            a[i] = r[i];
+        }
+        Assert.assertNotNull(a);
+    }
+
+
+    public void radixTest(){
+        int a[] =new int[]{1,2,2,34,5,6,7,32};
+        int n=a.length;
+
+
+
+    }
+    public void countingTest(int[] a,int exp){
+        if(a.length <= 1){
+            return;
+        }
+
+        //计算每个元素的个数
+        int[] c=new int[10];
+        for (int i=0;i< a.length;i++){
+            c[(a[i]/exp)%10]++;
+        }
+
+        //计算排序后的位置
+
+
 
     }
 }
