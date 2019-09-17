@@ -206,6 +206,7 @@ public class SortTest2 {
 
         //临时数组r,存储排序之后的结果
         int[] r = new int[n];
+        //倒序取数保证稳定排序
         for (int i = 0; i < n; i++) {
             int index=c[a[i]]-1;
             r[index] = a[i];
@@ -219,13 +220,27 @@ public class SortTest2 {
         Assert.assertNotNull(a);
     }
 
-
+    /**
+     * 从个位，对数组arr按“指数”进行排序
+     */
+    @Test
     public void radixTest(){
         int a[] =new int[]{1,2,2,34,5,6,7,32};
         int n=a.length;
 
+        int max = a[0];
+        for (int i=0;i<a.length;i++){
+            if(a[i] > max){
+                max = a[i];
+            }
+        }
 
+        //从个位开始，对数组a按“指数”进行排序
+        for (int exp = 1; max / exp > 0; exp *= 10) {
+            countingTest(a,exp);
+        }
 
+        Assert.assertNotNull(a);
     }
     public void countingTest(int[] a,int exp){
         if(a.length <= 1){
@@ -239,8 +254,20 @@ public class SortTest2 {
         }
 
         //计算排序后的位置
+        for(int i=1;i<c.length;i++){
+            c[i]+=c[i-1];
+        }
 
+        //转存数组
+        int[] r=new int[a.length];
+        //倒序取数，保证稳定排序
+        for (int i=a.length-1;i>=0;i--){
+            r[c[(a[i]/exp)%10]-1]=a[i];
+            c[(a[i] / exp) % 10]--;
+        }
 
-
+        for (int i=0;i<a.length;i++){
+            a[i]=r[i];
+        }
     }
 }
