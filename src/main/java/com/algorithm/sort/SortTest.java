@@ -95,6 +95,8 @@ public class SortTest  {
 
     /**
      * 将a[start...mid]和a[mid+1...end]
+     * 比较稳定
+     * 深度logn
      * @param a
      * @param start
      * @param mid
