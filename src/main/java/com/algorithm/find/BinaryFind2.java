@@ -16,7 +16,12 @@ public class BinaryFind2 {
      */
     @Test
     public void testBinarySqrt(){
-        sqrt(16);
+       // sqrt(16);
+        int[] a=new int[]{1,2,2,2,4,5};
+        int v=2;
+        //testBinary(a,v);
+        //testBinaryFirstValue(a,v);
+        testBinaryTailValue(a,v);
     }
 
 
@@ -46,6 +51,104 @@ public class BinaryFind2 {
 
     }
 
+    /**
+     * @param a
+     * @param v
+     */
+    public void testBinary(int[] a,int v){
+       int lo=0;
+       int hi=a.length-1;
+       int mid =0;
+       while (lo<=hi){
+           mid=lo+((hi-lo)>>1);
+           if(a[mid] < v){
+               lo = mid;
+           }else if(a[mid] > v){
+               hi = mid;
+           }
 
+           if(v == a[mid]){
+               break;
+           }
+       }
+        Assert.assertNotNull(mid);
+    }
+
+
+    /**
+     * 查找第一个值等于给定值的元素
+     * @param a
+     * @param v
+     */
+    public void testBinaryFirstValue(int[] a,int v){
+        int lo=0;
+        int hi=a.length-1;
+        int mid =0;
+        while (lo<=hi){
+            mid=lo+((hi-lo)>>1);
+            if(a[mid] <= v){
+                if(mid !=0 && a[mid-1] == v ){
+                    hi = mid;
+                }else{
+                    if(mid==0 || a[mid] == v){
+                        break;
+                    }else{
+                        lo = mid;
+                    }
+                }
+            }else if(a[mid] > v){
+                hi = mid;
+            }
+
+        }
+
+        Assert.assertNotNull(mid);
+    }
+
+
+    /**
+     * 查找最后一个值等于给定值的元素
+     * @param a
+     * @param v
+     */
+    public void testBinaryTailValue(int[] a,int v){
+        int lo=0;
+        int hi=a.length-1;
+        int mid =0;
+        while (lo<=hi){
+            mid=lo+((hi-lo)>>1);
+            if(a[mid] < v){
+               lo = mid;
+            }else if(a[mid] >= v){
+                if(mid !=0 && a[mid+1] == v){
+                    lo = mid;
+                }else if(mid==0 || a[mid] == v){
+                    break;
+                }else{
+                    hi = mid;
+                }
+            }
+        }
+        Assert.assertNotNull(mid);
+    }
+
+    /**
+     * 查找第一个大于等于给定值的元素
+     * @param a
+     * @param v
+     */
+    public void testBinaryMoreValue(int[] a,int v){
+
+    }
+
+
+    /**
+     * 查找最后一个小于等于给定值的元素
+     * @param a
+     * @param v
+     */
+    public void testBinaryLessValue(int[] a,int v){
+
+    }
 
 }
