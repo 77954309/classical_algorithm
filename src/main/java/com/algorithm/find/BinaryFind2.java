@@ -17,11 +17,14 @@ public class BinaryFind2 {
     @Test
     public void testBinarySqrt(){
        // sqrt(16);
-        int[] a=new int[]{1,2,2,2,4,5};
-        int v=2;
+        int[] a=new int[]{1,3,10,11,12,14,24,25};
+        int v=14;
         //testBinary(a,v);
         //testBinaryFirstValue(a,v);
-        testBinaryTailValue(a,v);
+        //testBinaryTailValue(a,v);
+
+        //testBinaryMoreValue(a,v);
+        testBinaryLessValue(a,v);
     }
 
 
@@ -138,7 +141,26 @@ public class BinaryFind2 {
      * @param v
      */
     public void testBinaryMoreValue(int[] a,int v){
-
+        int lo=0;
+        int hi=a.length-1;
+        int mid =0;
+        while (lo<=hi){
+            mid=lo+((hi-lo)>>1);
+            if(a[mid] < v){
+                lo = mid;
+            }else if(a[mid] >= v){
+                if (a[mid] == v) {
+                    lo=mid;
+                }else{
+                    if(mid==0 || a[mid-1] == v){
+                        break;
+                    }else{
+                        hi = mid;
+                    }
+                }
+            }
+        }
+        Assert.assertNotNull(mid);
     }
 
 
@@ -148,7 +170,26 @@ public class BinaryFind2 {
      * @param v
      */
     public void testBinaryLessValue(int[] a,int v){
-
+        int lo=0;
+        int hi=a.length-1;
+        int mid =0;
+        while (lo<=hi){
+            mid=lo+((hi-lo)>>1);
+            if(a[mid] <= v){
+                if(a[mid] == v){
+                    hi = mid;
+                }else{
+                    if(a[mid+1] == v){
+                        break;
+                    }else{
+                        lo = mid;
+                    }
+                }
+            }else if(a[mid] > v){
+                hi = mid;
+            }
+        }
+        Assert.assertNotNull(mid);
     }
 
 }
