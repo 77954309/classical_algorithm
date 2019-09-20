@@ -192,4 +192,10 @@ public class BinaryFind2 {
         Assert.assertNotNull(mid);
     }
 
+    /**
+     * 4,5,6,1,2,3
+     * 循环数组查找
+     */
+
+
 }
