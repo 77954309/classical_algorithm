@@ -204,15 +204,72 @@ public class BinaryFind2 {
      * 如果目标元素在循环有序数组中，设定数组边界后，使用以上方法继续查找。
      *
      */
+    @Test
     public void cycleByFind(){
+        int[] a=new int[]{4,5,6,1,2,3};
+        int v=2;
 
-         
-        int v=0;
+        int lo=0;
+        int hi=a.length-1;
+        int mid =0;
+//        while (lo <= hi){
+//            mid=lo+((hi-lo)>>1);
+//            if(a[mid] < v){
+//                lo = mid;
+//            }else if(a[mid] > v){
+//                hi = mid;
+//            }
+//
+//
+//        }
+
 
 
 
     }
 
+    @Test
+    public void cycleByFind2(){
+        int[] a=new int[]{4,5,6,1,2,3};
+        int v=2;
 
+        int lo=0;
+        int hi=0;
+        int result=-1;
+        for (int i = 0; i < a.length-1; i++) {
+            if(a[i]<a[i+1]){
+                hi =i + 1;
+            }else{
+                int i1 = cycleByFind3(lo, hi, a, v);
+                if(i1!=-1){
+                    result = i1;
+                    break;
+                }else{
+                    lo = hi +1;
+                }
+            }
+
+            if(a.length-1 == hi){
+                result = cycleByFind3(lo, hi, a, v);
+            }
+        }
+
+        Assert.assertNotNull(result);
+    }
+
+    public int cycleByFind3(int lo,int hi,int[] a,int value){
+        for(;lo<=hi;){
+            int mid=lo+((hi-lo)>>1);
+            if(a[mid] < value){
+                lo = mid+1;
+            }else if(a[mid] > value){
+                hi = mid -1;
+            }
+            if(a[mid] == value){
+                return mid;
+            }
+        }
+        return -1;
+    }
 
 }
