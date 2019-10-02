@@ -81,10 +81,18 @@ public class JumpTable {
         Node[] update = new Node[levelCount];
         Node p = head;
         for (int i = levelCount-1; i >=0 ; --i) {
-
+            while (p.forwards[i] != null && p.forwards[i].data < value){
+                p = p.forwards[i];
+            }
+            update[i] = p;
         }
-
-
+        if(p.forwards[0] != null && p.forwards[0].data == value){
+            for (int i = levelCount-1; i >= 0 ; i++) {
+                if(update[i].forwards[i] != null && update[i].forwards[i].data == value){
+                    update[i].forwards[i] = update[i].forwards[i].forwards[i];
+                }
+            }
+        }
     }
 
     public class Node{
