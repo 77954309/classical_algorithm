@@ -35,8 +35,47 @@ public class BinarySearchTree {
     }
 
 
+    /**
+     * 1.如果要删除的节点没有子节点，我们只需要直接将父节点中，指向要删除节点的指针置为null
+     * 2.如果要删除的节点只有一个子节点（只有左子节点或右子节点），我们只需要更新父节点中，指向要删除节点的指针，让它指向要删除节点的子节点就可以了。
+     * 3.如果要删除的节点有两个子节点，就比较复杂，我们需要找到这个节点的右子树中最小节点，把它替换到要删除的节点上。然后再删除掉这个最小节点，因为最小节点肯定没有左子节点（如果有左子结点，那就不是最小节点了），所以，我们可以应用上面两条规则来删除这个最小节点。
+     *
+     */
+    public void delete(int data){
+        Node p=tree;
+        Node pp = null;
+        while (p != null && p.data != data){
+            pp = p;
+            if(data > p.data) p = p.right;
+            else p = p.left;
+        }
 
+        if(p == null) return;//没有找到
+        //要删除的节点有两个子节点
+        if(p.left != null && p.right != null){
+            Node minP = p.right;
+            // minPP表示minP的父节点
+            Node minPP = p;
+            //查找右子树中最小节点
+            while (minP.left != null){
+                minPP = minP;
+                minP = minP.left;
+            }
 
+            p.data =minP.data;
+            p = minP;
+            pp = minPP;
+        }
+        //删除节点是叶子节点或者仅有一个子节点
+        Node child;
+        if(p.left != null) child = p.left;
+        else if(p.right != null) child = p.right;
+        else child = null;
+
+        if(pp == null) tree = child; //删除根节点
+        else if(pp.left == p) pp.left = child;
+        else pp.right = child;
+    }
 
 
     void preOrder(Node node){
@@ -56,6 +95,7 @@ public class BinarySearchTree {
         this.insert(15);
         this.insert(30);
 
+        this.delete(20);
         this.preOrder(tree);
     }
 
