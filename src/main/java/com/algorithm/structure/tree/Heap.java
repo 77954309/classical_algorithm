@@ -1,5 +1,8 @@
 package com.algorithm.structure.tree;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  * 堆
  *  堆是一个完全二叉树。
@@ -20,7 +23,35 @@ public class Heap {
     //堆中已经存储的数据个数
     private int count;
 
+    public Heap(int capacity){
+        a = new int[capacity + 1];
+        n = capacity;
+        count = 0;
+    }
 
+    private void swap(int[] tmp,int i,int j){
+         int tmps=a[i];
+         a[i] = a[j];
+         a[j] = tmps;
+    }
 
+    public void  insert( int data ){
+        if(count >= n) return;
+        ++count;
+        a[count] = data;
+        int i = count;
+        while (i/2 > 0 && a[i] > a[i/2]){
+            swap(a,i,i/2);
+            i = i / 2;
+        }
+    }
 
+    @Test
+    public void init(){
+        Heap heap = new Heap(10);
+        heap.insert(10);
+        heap.insert(5);
+        heap.insert(15);
+        Assert.assertNotNull(a);
+    }
 }
