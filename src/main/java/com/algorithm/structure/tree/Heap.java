@@ -2,6 +2,8 @@ package com.algorithm.structure.tree;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 /**
  * 堆
@@ -23,11 +25,12 @@ public class Heap {
     //堆中已经存储的数据个数
     private int count;
 
-    public Heap(int capacity){
+    public void before(int capacity){
         a = new int[capacity + 1];
         n = capacity;
         count = 0;
     }
+
 
     private void swap(int[] tmp,int i,int j){
          int tmps=a[i];
@@ -46,12 +49,29 @@ public class Heap {
         }
     }
 
+    /**
+     * 删除
+     */
+    public void  removeMax(){
+        if(count == 0) return ;
+
+
+    }
+
+
     @Test
     public void init(){
-        Heap heap = new Heap(10);
-        heap.insert(10);
-        heap.insert(5);
-        heap.insert(15);
+        before(10);
+        this.insert(10);
+        this.insert(5);
+        this.insert(15);
+        this.insert(20);
+        this.insert(25);
+        this.insert(30);
+
+
         Assert.assertNotNull(a);
     }
+
+
 }
