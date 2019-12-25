@@ -64,9 +64,10 @@ public class Heap {
         for (int i = n/2; i >= 1 ; --i) {
             heapify(a,n,i);
         }
-
-
     }
+
+
+
 
     /**
      * 删除
@@ -133,8 +134,8 @@ public class Heap {
 
         int[] result=new int[k];
         System.arraycopy(arr,n-k+1,result,0,k);
-        System.out.println(result);
 
+        Assert.assertNotNull(result);
     }
 
 
