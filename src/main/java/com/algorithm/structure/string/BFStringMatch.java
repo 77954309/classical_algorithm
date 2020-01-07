@@ -44,6 +44,10 @@ public class BFStringMatch {
         String[] o1 = {"b","a","d","d","e","f","c","d"};
         String[] t1 = {"e","f","c"};
 
+        long start2 = System.currentTimeMillis();
         this.create(o1,t1);
+
+        long end2 = System.currentTimeMillis();
+        System.out.println((end2-start2));
     }
 }

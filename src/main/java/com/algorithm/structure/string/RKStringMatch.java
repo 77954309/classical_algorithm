@@ -28,19 +28,19 @@ public class RKStringMatch {
      * @param t1
      */
     public void create(String[] o1,String[] t1){
-        int tl = t1.length;
+        int tlength = t1.length;
 
         Map<Integer,String> map= new HashMap<>();
         String r2 = Arrays.toString(t1);
         String m2 = parseStrToMd5L32(r2);
         String[] sb = null;
-        for (int i = 0; (i+tl) <= o1.length; i++) {
-            sb = new String[tl];
-            System.arraycopy(o1,i,sb,0,tl);
+        for (int i = 0; (i+tlength) <= o1.length; i++) {
+            sb = new String[tlength];
+            System.arraycopy(o1,i,sb,0,tlength);
             String r1 = Arrays.toString(sb);
             String m1 = parseStrToMd5L32(r1);
             if(m1.equals(m2)){
-                System.out.println("start:"+i+" end: "+(i+tl-1));
+                System.out.println("start:"+i+" end: "+(i+tlength-1));
                 break;
             }
         }
@@ -58,13 +58,21 @@ public class RKStringMatch {
      * h[i] = 26*(h[i-1]-26^(m-1)*(s[i-1]-'a')) + (s[i+m-1]-'a');
      *
      * 其中, h[i]、h[i-1] 分别对应 s[i] 和 s[i-1] 两个子串的哈希值
-     * @param o1
-     * @param t1
      */
-    public void create2(String[] o1,String[] t1){
-
-
-
+    public int create2(String haystack, String needle){
+        if(needle=="" || needle.length()==0)
+            return 0;
+        int n=haystack.length();
+        int m=needle.length();
+        int targetHash=hash(needle);
+        for(int i=0;i<n-m+1;i++)
+        {
+            String str=haystack.substring(i,i+m);
+            if(hash(str)==targetHash)
+                if(match(str,needle))
+                    return i;
+        }
+        return -1;
     }
 
 
@@ -109,22 +117,6 @@ public class RKStringMatch {
         return hash;
     }
 
-    public int strStr(String haystack, String needle) {
-        if(needle=="" || needle.length()==0)
-            return 0;
-        int n=haystack.length();
-        int m=needle.length();
-        int targetHash=hash(needle);
-        for(int i=0;i<n-m+1;i++)
-        {
-            String str=haystack.substring(i,i+m);
-            if(hash(str)==targetHash)
-                if(match(str,needle))
-                    return i;
-        }
-        return -1;
-    }
-
 
 
     @Test
@@ -135,7 +127,32 @@ public class RKStringMatch {
         Assert.assertNotNull(test);
         String[] o1 = {"b","a","d","d","e","f","c","d"};
         String[] t1 = {"e","f","c"};
+        long start1 = System.currentTimeMillis();
+        //md5hash
         this.create(o1,t1);
+        long end1 = System.currentTimeMillis();
+
+        System.out.println((end1-start1));
+
+        String haystack = null;
+        String needle = null;
+
+        haystack = "baddefcd";
+        needle = "efc";
+
+        long start2 = System.currentTimeMillis();
+        //自定义hash
+        int i = create2(haystack, needle);
+        long end2 = System.currentTimeMillis();
+        System.out.println((end2-start2));
+
+        Assert.assertNotNull(i);
+
+        String [][] str1={{"d","a","b","c"},{"e","f","a","d"},{"c","c","a","f"},{"d","e","f","c"}};
+        String [][] str2={{"c","a","b","c"},{"e","f","a","d"},{"c","c","a","f"},{"d","e","f","c"}};
+
+
+
 
     }
 
