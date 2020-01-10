@@ -1,5 +1,6 @@
 package com.algorithm.structure.string;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -28,22 +29,22 @@ public class KMPStringMatch {
      */
     public  int[] matchTable(char[] c) {
         int length = c.length;
-        int[] a = new int[length];
+        int[] next = new int[length];
         int i, j;
-        a[0] = -1;
+        next[0] = -1;
         i = 0;
         for (j = 1; j < length; j++) {
-            i = a[j - 1];
+            i = next[j - 1];
             while (i >= 0 && c[j] != c[i + 1]) {
-                i = a[i];
+                i = next[i];
             }
             if (c[j] == c[i + 1]) {
-                a[j] = i + 1;
+                next[j] = i + 1;
             } else {
-                a[j] = -1;
+                next[j] = -1;
             }
         }
-        return a;
+        return next;
     }
 
     /**
@@ -71,6 +72,44 @@ public class KMPStringMatch {
             return true;
     }
 
+
+    private  int[] getNexts(char[] b,int m){
+        int[] next = new int[m];
+        next[0] = -1;
+        int k = -1;
+        for (int i = 1; i < m; i++) {
+            while (k != -1 && b[k+1] != b[i]){
+                k = next[k];
+            }
+
+            if(b[k+1] == b[i]){
+                ++k;
+            }
+            next[i] = k;
+        }
+        return next;
+    }
+
+    private int kmp(char[] a,int n,char[] b,int m){
+        int[] nexts = getNexts(b, m);
+        int j=0;
+        for (int i = 0; i < n; i++) {
+            while (j > 0 && a[i] != b[j]){
+                j = nexts[j-1]+1;
+            }
+            if(a[i] == b[j]){
+                ++j;
+            }
+            if(j == m){
+                return i-m+1;
+            }
+
+        }
+
+        return -1;
+    }
+
+
     @Test
     public void init(){
         //-1 -1 0 1 2
@@ -80,6 +119,9 @@ public class KMPStringMatch {
 //        String b = "ABCDABDF";
 //        String a ="ABCDABD";
 
-        boolean b1 = hasSubString(b, a);
+        //boolean b1 = hasSubString(b, a);
+
+        int kmp = kmp(b.toCharArray(), b.length(), a.toCharArray(), a.length());
+        Assert.assertNotNull(kmp);
     }
 }
