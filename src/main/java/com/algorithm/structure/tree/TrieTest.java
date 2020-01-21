@@ -32,11 +32,28 @@ public class TrieTest {
         TrieNode p = root;
         for (int i = 0; i < text.length; i++) {
             int index = text[i] - 'a';
-
-
+            if(p.children[index] == null){
+                TrieNode newTrieNode = new TrieNode(text[i]);
+                p.children[index] = newTrieNode;
+            }
+            p = p.children[index];
         }
+        p.isEndingChar = true;
     }
 
+    public boolean find(char[] pattern){
+         TrieNode p = root;
+        for (int i = 0; i < pattern.length; i++) {
+            int index = pattern[i] - 'a';
+            if(p.children[index] == null){
+                return false;
+            }
+            p = p.children[index];
+        }
+
+        if(p.isEndingChar == false) return  false;
+        else  return true;
+    }
 
 
 
