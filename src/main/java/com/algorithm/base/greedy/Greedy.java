@@ -88,6 +88,11 @@ public class Greedy {
         System.out.println("sum:"+sum);
     }
 
+    /**
+     * 0-1背包
+     */
+    public int maxW=Integer.MAX_VALUE;
+
 
 
     @Test
