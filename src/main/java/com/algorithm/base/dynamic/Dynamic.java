@@ -1,5 +1,8 @@
 package com.algorithm.base.dynamic;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  * 动态规划
  * @Classname Dynamic
@@ -48,7 +51,72 @@ public class Dynamic {
         }
     }
 
+    /**
+     * 二维数组
+     * 只能右移动和向下移动，找出最短到达底部的路径
+     * 只能从(i,j-1)或者（i-1,j）
+     */
+    private int minDist = Integer.MAX_VALUE;
+    //调用方式：
+
+    // 调用方式：minDistBacktracing(0, 0, 0, w, n);
+    public void minDistBT(int i, int j, int dist, int[][] w, int n) {
+        // 到达了n-1, n-1这个位置了，这里看着有点奇怪哈，你自己举个例子看下
+        if (i == n && j == n) {
+            if (dist < minDist) minDist = dist;
+            return;
+        }
+        if (i < n) { // 往下走，更新i=i+1, j=j
+            minDistBT(i + 1, j, dist+w[i][j], w, n);
+        }
+        if (j < n) { // 往右走，更新i=i, j=j+1
+            minDistBT(i, j+1, dist+w[i][j], w, n);
+        }
+    }
 
 
+    /**
+     * 状态转移表
+     * @param matrix
+     * @param n
+     * @return
+     */
+    public int mindistDP(int[][] matrix,int n){
+       int[][] states =new int[n][n];
+       int sum = 0;
 
+        for (int j = 0; j < n; j++) {
+            sum += matrix[0][j];
+            states[0][j] = sum;
+        }
+
+        sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum +=matrix[i][0];
+            states[i][0] = sum;
+        }
+
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < n; j++) {
+                states[i][j] = matrix[i][j] + Math.min(states[i][j-1],states[i-1][j]);
+            }
+        }
+
+        return states[n-1][n-1];
+    }
+
+
+    @Test
+    public void  init(){
+
+        int[][] w={{1,3,5},{2,1,3},{5,2,6}};
+        minDistBT(0,0,0,w,w.length);
+//
+//
+        Assert.assertNotNull(minDist);
+
+     //   int dp = mindistDP(w, w.length);
+     //   Assert.assertNotNull(dp);
+    }
 }
