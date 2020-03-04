@@ -51,6 +51,77 @@ public class Dynamic {
         }
     }
 
+
+    /**
+     * 0-1背包
+     * 状态表
+     * @param weight 物品重量
+     * @param n 物品个数
+     * @param w 背包可承载重量
+     * @return
+     */
+    public int knapsack(int[] weight,int n,int w){
+        boolean[][] states = new boolean[n][w+1];//默认值false
+        states[0][0] = true;
+        if(weight[0] <= w){
+            states[0][weight[0]] = true;
+        }
+
+        //动态规划转移
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j <= w; j++) {
+                if(states[i-1][j] == true) states[i][j] = states[i-1][j];
+            }
+
+            for (int j = 0; j <= w-weight[i] ; j++) {
+                if(states[i-1][j] == true) states[i][j+weight[i]] = true;
+            }
+
+        }
+        //输出结果
+        for (int i = w; i >= 0; --i) {
+            if(states[n-1][i] == true) return i;
+        }
+
+        return 0;
+    }
+
+    /**
+     * 0-1背包
+     * 状态表
+     * @param items
+     * @param n
+     * @param w
+     * @return
+     */
+    public static int knapsack2(int[] items,int n,int w){
+        boolean[] states = new boolean[w + 1];
+        states[0] = true;
+        if(items[0] <= w){
+            states[items[0]] = true;
+        }
+
+        for (int i = 1; i < n; i++) {
+            for (int j = w-items[i]; j >= 0 ; j++) {
+                if(states[j] == true) states[j+items[i]] = true;
+            }
+        }
+
+        for (int i = w; i >= 0; --i) {
+            if(states[i] == true) return i;
+        }
+        return 0;
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * 二维数组
      * 只能右移动和向下移动，找出最短到达底部的路径
