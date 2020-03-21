@@ -40,6 +40,7 @@ public class Heap {
 
     /**
      * 从下往上堆化
+     * 大顶堆
      * @param data
      */
     public void  insert( int data ){
@@ -53,6 +54,20 @@ public class Heap {
         }
     }
 
+    /**
+     * 从下往上堆化
+     * 小顶堆
+     */
+    public void insert2(int data){
+        if(count >= n) return;
+        ++count;
+        a[count] = data;
+        int i = count;
+        while (i/2 > 0 && a[i] <= a[i/2]){
+            swap(a,i,i/2);
+            i = i / 2;
+        }
+    }
     /**
      * 由上往下堆化
      * n/2 到 1 树都是节点
@@ -71,6 +86,7 @@ public class Heap {
 
     /**
      * 删除
+     * 大顶堆
      */
     public void  removeMax(){
         if(count == 0) return ;
@@ -81,7 +97,18 @@ public class Heap {
     }
 
     /**
-     *自向上堆化
+     * 小顶堆
+     * 删除
+     */
+    public void  removeMin(){
+        if(count == 0) return ;
+        a[1] = a[count];
+        a[count] = 0;
+        --count;
+        heapify2(a,count,1);
+    }
+    /**
+     *自上向下堆化
      * i
      * i*2 左 ，i*2+1 右
      * @param a
@@ -97,6 +124,27 @@ public class Heap {
            swap(a, i, max);
            i = max;
        }
+    }
+
+
+
+    /**
+     *自上向下堆化
+     * i
+     * i*2 左 ，i*2+1 右
+     * @param a
+     * @param n 最大
+     * @param i
+     */
+    public void heapify2(int[] a,int n,int i){
+        while (true) {
+            int min = i;
+            if (i * 2 < n && a[i * 2] < a[i]) min = i * 2;
+            if (i * 2 + 1 < n && a[i * 2 + 1] < a[min]) min = i * 2 + 1;
+            if (min == i) break;
+            swap(a, i, min);
+            i = min;
+        }
     }
 
 
@@ -145,24 +193,26 @@ public class Heap {
 
     @Test
     public void init(){
-//        before(10);
-//        this.insert(10);
-//        this.insert(5);
-//        this.insert(15);
-//        this.insert(20);
-//        this.insert(25);
-//        this.insert(30);
+        before(10);
+        this.insert2(10);
+        this.insert2(5);
+        this.insert2(15);
+        this.insert2(20);
+        this.insert2(25);
+        this.insert2(30);
 
+        removeMin();
+        Assert.assertNotNull(a);
         //removeMax();
-
-        int[] s={0,30,10,15,40,25,5,50,60,70,21};
-        //sort(s,6);
-        //insert(s,6);
-        topK(s,10,4);
-
-
-
-        Assert.assertNotNull(s);
+//
+//        int[] s={0,30,10,15,40,25,5,50,60,70,21};
+//        //sort(s,6);
+//        //insert(s,6);
+//        topK(s,10,4);
+//
+//
+//
+//        Assert.assertNotNull(s);
     }
 
 
