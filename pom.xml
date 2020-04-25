@@ -47,6 +47,24 @@
             <version>${scala.version}</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.openjdk.jmh</groupId>-->
+<!--            <artifactId>jmh-core</artifactId>-->
+<!--            <version>1.22</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.openjdk.jmh</groupId>-->
+<!--            <artifactId>jmh-generator-annprocess</artifactId>-->
+<!--            <version>1.22</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/site.ycsb/core &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>site.ycsb</groupId>-->
+<!--            <artifactId>core</artifactId>-->
+<!--            <version>0.17.0</version>-->
+<!--        </dependency>-->
+
+
     </dependencies>
 
     <build>
