@@ -63,9 +63,6 @@ public class Heap2 {
 
 
 
-
-
-
     public static void main(String[] args) {
         Heap2 heap2 = new Heap2(10);
         heap2.insert(10);
