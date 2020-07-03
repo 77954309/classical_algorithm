@@ -1,10 +1,5 @@
 package com.algorithm;
 
-import com.algorithm.structure.linear.Link;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
-
 /**
  * ${DESCRIPTION}
  *

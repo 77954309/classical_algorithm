@@ -1,4 +1,4 @@
-package com.algorithm.structure.linear;
+package com.algorithm.structure.link;
 
 /**
  * 双向链表链接点

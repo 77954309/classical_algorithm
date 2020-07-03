@@ -1,7 +1,7 @@
 package com.algorithm.sort;
 
-import com.algorithm.structure.linear.Link;
-import com.algorithm.structure.linear.LinkList;
+import com.algorithm.structure.link.Link;
+import com.algorithm.structure.link.LinkList;
 import org.junit.Test;
 
 /**

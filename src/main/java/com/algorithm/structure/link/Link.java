@@ -1,4 +1,4 @@
-package com.algorithm.structure.linear;
+package com.algorithm.structure.link;
 
 /**
  * 链接点 数据下一个指针

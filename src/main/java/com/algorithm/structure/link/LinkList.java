@@ -1,6 +1,7 @@
-package com.algorithm.structure.linear;
+package com.algorithm.structure.link;
 
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -106,6 +107,26 @@ public class LinkList {
         System.out.println(pre);
     }
 
+
+    public void reverseListNode2(){
+        Link resNode = null;
+        Link preNode = null;
+        Link curNode = first;
+
+        while (curNode != null){
+            Link next = curNode.getNext();
+            if(next == null){
+                resNode = curNode;
+            }
+
+            curNode.setNext(preNode);
+            preNode = curNode; //反转指针
+            curNode = next;
+        }
+
+        Assert.assertNotNull(resNode);
+    }
+
     /**
      * 显示
      */
@@ -119,6 +140,37 @@ public class LinkList {
     }
 
 
+    public void deleteLastKByNode(int k){
+        Link fast = first;
+        //计数
+        int i = 1;
+        while (fast != null && i < k){
+            fast = fast.getNext();
+        }
+
+        if(fast == null){
+            return;
+        }
+
+        Link slow = first;
+        Link preNode = null;
+
+        while (fast.getNext() != null){
+            fast = fast.getNext();
+            preNode = slow;
+            slow = slow.getNext();
+        }
+
+        if(preNode == null){
+            first = first.getNext();
+        }else{
+            //删除
+            preNode.setNext(preNode.getNext().getNext());
+        }
+        Assert.assertNotNull(first);
+    }
+
+
     public Link show(){
         return this.first;
     }
@@ -128,13 +180,19 @@ public class LinkList {
         this.insert(1);
         this.insert(2);
         this.insert(3);
-        this.insert(4);
+        this.insert(5);
+        this.insert(6);
+        this.insert(7);
+        this.insert(8);
         //this.insert(2,2);
         /*this.remove(4);
         Link link = this.find(1);*/
 
         this.displayAll();
-        this.reverseListNode();
+        //this.reverseListNode();
+        //this.reverseListNode2();
+        this.deleteLastKByNode(1);
+
     }
 
     public void hannoTowerInit(){

@@ -1,6 +1,6 @@
 package com.algorithm.structure.queue;
 
-import com.algorithm.structure.linear.TwoWayLink;
+import com.algorithm.structure.link.TwoWayLink;
 import org.junit.Test;
 
 /**
