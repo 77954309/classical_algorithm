@@ -3,7 +3,7 @@ package com.algorithm.structure.queue;
 import org.junit.Test;
 
 /**
- * https://blog.csdn.net/YPJMFC/article/details/78246971
+ *
  * 位运算
  * @Author: limeng
  * @Date: 2019/8/28 10:45
