@@ -1,5 +1,7 @@
 package com.algorithm.structure.link;
 
+import org.junit.Test;
+
 /**
  * @Classname LruList
  * @Description TODO
@@ -15,12 +17,10 @@ package com.algorithm.structure.link;
  */
 public class LruList {
     private Link first;
-    private int defaultSize = 10;
+    private int defaultSize = 5;
     private int length = 0;
 
-    public void addIn(long data){
 
-    }
 
     /**
      * 查看前缀
@@ -40,7 +40,7 @@ public class LruList {
         while (tmp.getNext() != null){
             Link next = tmp.getNext();
             long data1 = next.getData();
-            if(data1 == data1){
+            if(data1 == data){
                 return tmp;
             }
             tmp = tmp.getNext();
@@ -77,6 +77,21 @@ public class LruList {
     }
 
     /**
+     * 插入头部数据
+     * @param data
+     */
+    public void addHead(long data){
+        Link tmp =first;
+        Link link = new Link(data);
+        if(tmp!= null){
+            link.setNext(tmp);
+        }
+        first = link;
+        length ++;
+    }
+
+
+    /**
      * 删除尾结点
      */
     public void deleteElement(){
@@ -88,7 +103,7 @@ public class LruList {
             length--;
         }
         Link tmp = first;
-        if(tmp.getNext().getNext() != null){
+        while (tmp.getNext().getNext() != null){
             tmp = tmp.getNext();
         }
         tmp.setNext(null);
@@ -96,6 +111,31 @@ public class LruList {
     }
 
 
+    public void addInFind(long data){
+        Link pre = findPre(data);
+        if(pre != null){
+            boolean isPre = pre.getData() != data;
+            removePre(pre,isPre);
+            addHead(data);
+        }else if(length < defaultSize){
+            addHead(data);
+        }else{
+            deleteElement();
+            addHead(data);
+        }
+    }
+
+    @Test
+    public void init(){
+        addInFind(1L);
+        addInFind(2L);
+        addInFind(3L);
+        addInFind(4L);
+        addInFind(5L);
+        addInFind(6L);
+        addInFind(7L);
+        System.out.println(first);
+    }
 
 
 }
