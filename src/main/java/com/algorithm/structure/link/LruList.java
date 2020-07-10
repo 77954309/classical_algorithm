@@ -60,21 +60,6 @@ public class LruList {
         }
     }
 
-    public void add(long data){
-        Link link = new Link(data);
-
-        if(first == null){
-            first = link;
-            length ++;
-        }else{
-            Link tmp = first;
-            while (tmp.getNext() != null){
-                tmp = tmp.getNext();
-            }
-            tmp.setNext(link);
-            length ++;
-        }
-    }
 
     /**
      * 插入头部数据
