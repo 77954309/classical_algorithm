@@ -1,7 +1,7 @@
 package com.algorithm.structure.link;
 
 /**
- * 双向链表链接点
+ * 双向表链接点
  *
  * @author limeng
  * @create 2018-12-10 下午2:38
