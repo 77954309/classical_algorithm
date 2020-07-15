@@ -1,6 +1,7 @@
 package com.algorithm.structure.link;
 
 
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,6 +26,24 @@ public class LinkList {
             link.setNext(first);
         }
          first = link;
+    }
+
+    /**
+     * 尾插
+     * @param data
+     */
+    public void insetTail(long data){
+        Link link = new Link(data);
+        if(first == null){
+            first = link;
+        }else{
+            Link tmp = first;
+            while (tmp.getNext() != null){
+                tmp = tmp.getNext();
+            }
+            link.setNext(tmp.getNext());
+            tmp.setNext(link);
+        }
     }
 
     /**
@@ -89,44 +108,6 @@ public class LinkList {
     }
 
 
-    public void reverseListNode(){
-        Link current = first;
-        if(current == null || current.getNext() == null){
-            return;
-        }
-
-        Link pre=null;
-        Link next=null;
-
-        while (current != null){
-            next = current.getNext();
-            current.setNext(pre);
-            pre = current;
-            current = next;
-        }
-        System.out.println(pre);
-    }
-
-
-    public void reverseListNode2(){
-        Link resNode = null;
-        Link preNode = null;
-        Link curNode = first;
-
-        while (curNode != null){
-            Link next = curNode.getNext();
-            if(next == null){
-                resNode = curNode;
-            }
-
-            curNode.setNext(preNode);
-            preNode = curNode; //反转指针
-            curNode = next;
-        }
-
-        Assert.assertNotNull(resNode);
-    }
-
     /**
      * 显示
      */
@@ -170,39 +151,85 @@ public class LinkList {
         Assert.assertNotNull(first);
     }
 
+    /**
+     * 反转
+     */
+    public void reverseList(){
+        Link resLink = null;
+        Link prevLink = null;
+        Link curLink = first;
 
-    public Link show(){
-        return this.first;
+        while (curLink != null){
+            Link nextLink = curLink.getNext();
+            if(nextLink == null){
+                resLink = curLink;
+            }
+            curLink.setNext(prevLink);
+            prevLink = curLink;
+            curLink = nextLink;
+        }
+        Assert.assertNotNull(resLink);
     }
+
+    /**
+     * 链表中环
+     */
+    public boolean checkCire(){
+        boolean result = false;
+        if(first == null){
+            return  result;
+        }
+        Link fast = first.getNext();
+        Link slow= first;
+
+        while (fast!= null && fast.getNext() != null){
+            fast = fast.getNext().getNext();
+            slow = slow.getNext();
+            if(fast == slow){
+                return true;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 链表中间节点
+     */
+    public void findMiddleByNode(){
+        if(first == null) return;
+
+        Link fast = first.getNext();
+        Link slow = first;
+        //快指针走完一圈，慢指针半圈
+        while (fast != null && fast.getNext() != null){
+            fast = fast.getNext().getNext();
+            slow = slow.getNext();
+        }
+        Assert.assertNotNull(slow);
+    }
+
 
     @Test
     public void init(){
-        this.insert(1);
-        this.insert(2);
-        this.insert(3);
-        this.insert(5);
-        this.insert(6);
-        this.insert(7);
-        this.insert(8);
+        this.insetTail(1);
+//        this.insetTail(2);
+//        this.insetTail(3);
+//        this.insetTail(4);
+//        this.insetTail(5);
+//        this.insetTail(6);
+//        this.insetTail(7);
+//        this.insetTail(8);
+//        this.insetTail(9);
         //this.insert(2,2);
         /*this.remove(4);
         Link link = this.find(1);*/
-
-        this.displayAll();
+        findMiddleByNode();
+        //this.displayAll();
+        //reverseList();
         //this.reverseListNode();
         //this.reverseListNode2();
         this.deleteLastKByNode(1);
 
-    }
-
-    public void hannoTowerInit(){
-        this.insert(1);
-        this.insert(2);
-        this.insert(3);
-        this.insert(4);
-
-        this.displayAll();
-        System.out.println("-------------------------");
     }
 
 

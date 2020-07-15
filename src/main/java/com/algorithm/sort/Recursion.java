@@ -24,14 +24,6 @@ public class Recursion {
     }
 
 
-
-    @Test
-    public void hannoTowerInit(){
-        LinkList linkList = new LinkList();
-        linkList.hannoTowerInit();
-        this.hannoTower(linkList.show());
-    }
-
     /**
      * 回溯指针
      * 测试数据

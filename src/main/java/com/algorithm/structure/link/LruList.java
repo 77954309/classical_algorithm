@@ -21,7 +21,6 @@ public class LruList {
     private int length = 0;
 
 
-
     /**
      * 查看前缀
      * @param data
@@ -48,6 +47,11 @@ public class LruList {
         return null;
     }
 
+    /**
+     * 根据前缀删除数据
+     * @param pre
+     * @param isPre
+     */
     public void removePre(Link pre,boolean isPre){
         if(isPre){
             Link tmp = pre.getNext();
@@ -95,10 +99,23 @@ public class LruList {
         length-- ;
     }
 
-
+    /**
+     * 根据条件插入
+     *
+     * @param data
+     */
     public void addInFind(long data){
+        /**
+         * 判断前缀
+         * 如果有结点，找前缀删除，把数据插入到头部
+         * 没有结点，判断是否空间占满（根据设置defaultSize判断）
+         * ，如满，删除末尾结点，把数据插入头部，
+         * 否则
+         *
+         */
         Link pre = findPre(data);
         if(pre != null){
+
             boolean isPre = pre.getData() != data;
             removePre(pre,isPre);
             addHead(data);
@@ -112,14 +129,7 @@ public class LruList {
 
     @Test
     public void init(){
-        addInFind(1L);
-        addInFind(2L);
-        addInFind(3L);
-        addInFind(4L);
-        addInFind(5L);
-        addInFind(6L);
-        addInFind(7L);
-        System.out.println(first);
+
     }
 
 
