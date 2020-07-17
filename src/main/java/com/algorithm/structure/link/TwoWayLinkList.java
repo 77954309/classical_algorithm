@@ -112,6 +112,38 @@ public class TwoWayLinkList {
 
 
 
+    public TwoWayLink find(long data){
+        TwoWayLink node = first;
+        TwoWayLink reslut = null;
+        while (node != null){
+            if(node.getData() == data){
+                reslut = node;
+                break;
+            }else{
+                node = node.getNext();
+            }
+        }
+        return reslut;
+    }
+
+    public void remove(long data){
+        TwoWayLink node = find(data);
+        if(node == first && node == tail){
+            first = null;
+            tail = null;
+        }else if(node == first){
+            first = first.getNext();
+            first.setFront(null);
+        }else if(node == tail){
+            tail = tail.getFront();
+            tail.setNext(null);
+        }else{
+            //中间节点
+            node.getFront().setNext(node.getNext());
+            node.getNext().setFront(node.getFront());
+        }
+    }
+
 
     @Test
     public void init(){
@@ -125,12 +157,12 @@ public class TwoWayLinkList {
         this.displayFirstAll();
 
         //尾插
-        this.addTailinsert(1);
-        this.addTailinsert(2);
-        this.addTailinsert(3);
+//        this.addTailinsert(1);
+//        this.addTailinsert(2);
+//        this.addTailinsert(3);
         //this.addAfter(33,1);
 
-        this.displayTailAll();
+//        this.displayTailAll();
 
 
     }
