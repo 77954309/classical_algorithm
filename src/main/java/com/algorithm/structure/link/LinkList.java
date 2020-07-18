@@ -120,7 +120,10 @@ public class LinkList {
 
     }
 
-
+    /**
+     * 倒数第n个结点
+     * @param k
+     */
     public void deleteLastKByNode(int k){
         Link fast = first;
         //计数
@@ -206,6 +209,48 @@ public class LinkList {
             slow = slow.getNext();
         }
         Assert.assertNotNull(slow);
+    }
+
+    /**
+     * 合并有序节点
+     * @param pNode
+     * @param qNode
+     * @return
+     */
+    public Link mergeNode(Link pNode, Link qNode) {
+        if (pNode == null)
+            return qNode;
+        if (qNode == null)
+            return pNode;
+        Link p = pNode;
+        Link q = qNode;
+        Link resNode = null;
+        //第一个结点判断
+        if (p.getData() < q.getData()) {
+            resNode = p;
+            p = p.getNext();
+        } else {
+            resNode = q;
+            q = q.getNext();
+        }
+        Link node = resNode;
+        while (p != null && q != null) {
+            if (p.getData() < q.getData()) {
+                node.setNext(p);
+                p = p.getNext();
+            } else {
+                node.setNext(q);
+                q = q.getNext();
+            }
+            node = node.getNext();
+        }
+        //末尾节点
+        if (p != null) {
+            node.setNext(p);
+        } else {
+            node.setNext(q);
+        }
+        return resNode;
     }
 
 

@@ -17,7 +17,7 @@ public class CycleLinkAlgorithm {
      */
     @Test
     public void josephInit(){
-        CycleLinkList cycleLinkList = new CycleLinkList();
+        CycleSingleLinkList cycleLinkList = new CycleSingleLinkList();
          //约瑟夫循环链表
         cycleLinkList.initList();
         for (int i = 0; i < 41; i++) {
@@ -40,7 +40,7 @@ public class CycleLinkAlgorithm {
      */
     @Test
     public void magicInit(){
-        CycleLinkList cycleLinkList = new CycleLinkList();
+        CycleSingleLinkList cycleLinkList = new CycleSingleLinkList();
         //约瑟夫循环链表
         cycleLinkList.initList();
         for (int i = 0; i < 13; i++) {
