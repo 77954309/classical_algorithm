@@ -30,7 +30,7 @@ public class MyQueue2 {
         if(tail == n) {
             //队列占满
             if(head == 0) return;
-            //数据搬移
+            //数据搬移,把已经出队的空余位置，填充
             for (int i = head; i < tail; i++) {
                 items[i-head] = items[i];
             }
@@ -72,17 +72,16 @@ public class MyQueue2 {
         head = (head+1)&(n-1);
         return item;
     }
-    @Test
-    public void init(){
 
-    }
 
     public static void main(String[] args) {
-        MyQueue2 myQueue2 = new MyQueue2(3);
+        MyQueue2 myQueue2 = new MyQueue2(8);
         myQueue2.cycleEnqueue("1");
         myQueue2.cycleEnqueue("2");
         myQueue2.cycleEnqueue("3");
         myQueue2.cycleEnqueue("4");
         myQueue2.cycleEnqueue("5");
+
+        myQueue2.cycleDequeue();
     }
 }
