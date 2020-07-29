@@ -1,6 +1,7 @@
 package com.algorithm.sort;
 
 import com.algorithm.sort.model.Example;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -31,10 +32,34 @@ public class InsertSort extends Example {
         }
     }
 
+
+    public void insertSort(int[] a,int n){
+        if(n <= 1) return;
+
+        for (int i = 1; i < n; i++) {
+            int value = a[i];
+            int j = i - 1 ;
+            //查找插入位置
+            for (;i >= 0 ; --j){
+                if(a[j] > value){
+                    a[j+1] = a[j];
+                }else {
+                    break;
+                }
+            }
+            a[j+1] = value;//插入数据
+        }
+    }
+
+
     @Test
     public void init(){
-        Comparable[] a={1,10,3,2,40,60,50,5};
-        this.sort(a);
-        this.show(a);
+//        Comparable[] a={1,10,3,2,40,60,50,5};
+//        this.sort(a);
+//        this.show(a);
+
+        int[] a={1,10,3,2,40,60,50,5};
+        insertSort(a,a.length);
+        Assert.assertNotNull(a);
     }
 }
