@@ -1,6 +1,7 @@
 package com.algorithm.sort;
 
 import com.algorithm.sort.model.Example;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -27,10 +28,34 @@ public class SelectSort extends Example {
         }
     }
 
+    /**
+     *
+     * @param a 数组
+     */
+    public void selectSort(int[] a){
+        int length = a.length;
+        for (int i = 0; i < length; i++) {
+            int min = i;
+            for (int j = i+1; j < length; j++) {
+                if(a[j] < a[min]){
+                    min = j;
+                }
+            }
+            int tmp = a[i];
+            a[i] = a[min];
+            a[min] = tmp;
+        }
+    }
+
+
     @Test
     public void init(){
-        Comparable[] a={'S','O','R','T'};
-        this.sort(a);
-        this.show(a);
+//        Comparable[] a={'S','O','R','T'};
+//        this.sort(a);
+//        this.show(a);
+
+        int[] a={3,1,4,5,7,2};
+        selectSort(a);
+        Assert.assertNotNull(a);
     }
 }
