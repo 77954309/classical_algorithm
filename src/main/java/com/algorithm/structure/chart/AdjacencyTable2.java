@@ -142,14 +142,14 @@ public class AdjacencyTable2 {
         adjacencyTable2.addEdge(0,1);
         adjacencyTable2.addEdge(1,2);
         adjacencyTable2.addEdge(2,3);
-        adjacencyTable2.addEdge(3,4);
+        adjacencyTable2.addEdge(4,2);
         adjacencyTable2.addEdge(4,0);
 
         //adjacencyTable2.display();
 
-        //adjacencyTable2.bfs(0,3);
+        adjacencyTable2.bfs(0,4);
 
-        adjacencyTable2.dfs(0,3);
+      //  adjacencyTable2.dfs(0,3);
     }
 
 }
