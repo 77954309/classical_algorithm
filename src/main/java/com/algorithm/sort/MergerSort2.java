@@ -1,5 +1,8 @@
 package com.algorithm.sort;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  * @Classname MergerSort2
  * @Description TODO
@@ -10,7 +13,7 @@ package com.algorithm.sort;
 public class MergerSort2 {
 
     public void mergeSort(int[] a,int n){
-
+        mergeSortInternally(a,0,n-1);
     }
 
     //递归调用函数
@@ -36,9 +39,9 @@ public class MergerSort2 {
         int[] tmp = new int[r-p+1]; //申请
         while (i <= q && j <= r){
             if(a[i] <= a[j]){
-                a[k++] = a[i++];
+                tmp[k++] = a[i++];
             }else{
-                a[k++] = a[j++];
+                tmp[k++] = a[j++];
             }
         }
 
@@ -60,5 +63,12 @@ public class MergerSort2 {
         }
     }
 
+
+    @Test
+    public void init(){
+        int[] a = {1,5,6,7,10,11};
+        mergeSort(a,a.length);
+        Assert.assertNotNull(a);
+    }
 
 }
