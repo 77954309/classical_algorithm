@@ -1,52 +1,54 @@
 package com.algorithm.sort;
 
-import com.algorithm.sort.model.Example;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * 快速排序
- *
- * @author limeng
- * @create 2018-12-24 下午6:56
- **/
-public class QuickSort extends Example {
+ * @Classname QuickSort2
+ * @Description TODO
+ * @Date 2020/8/8 14:04
+ * @Created by limeng
+ */
+public class QuickSort {
 
+    public void quickSort(int[] a,int n){
+        quickSortInternally(a,0,n-1);
+    }
 
-    protected int partition(Comparable[] a,int lo,int hi){
-        int i=lo;
-        int j = hi+1;
+    public void quickSortInternally(int[] a,int p,int r){
+        if(p >= r) return;
 
-        Comparable v = a[i];
-        while (true){
-            //扫描左
-            while(this.less(a[++i],v)) if(i == hi) break;
-            //扫描右
-            while(this.less(v,a[--j])) if(j == lo) break;
-            if(i >= j) break;
-            this.exch(a,i,j);//右部分小于v的前移
+        int q = partition(a,p,r); //获取分区点
+        quickSortInternally(a,p,q-1);
+        quickSortInternally(a,q+1,r);
+    }
+
+    public int partition(int[] a,int p,int r){
+        int pivot = a[r];
+        int i = p;
+        for (int j = p; j < r; j++) {
+            if(a[j] < pivot){
+                if(i == j){
+                    ++i;
+                }else{
+                    int tmp = a[i];
+                    a[i++] = a[j];
+                    a[j] = tmp;
+                }
+            }
         }
-        this.exch(a,lo,j);
-        return j;
-    }
 
+        int tmp = a[i];
+        a[i] = a[r];
+        a[r] = tmp;
 
-    @Override
-    protected void sort(Comparable[] a) {
-        this.sort(a,0,a.length-1);
-    }
-
-    protected void sort(Comparable[] a,int lo,int hi) {
-        if(hi <= lo) return;
-
-        int j = this.partition(a,lo,hi);
-        this.sort(a,lo,j-1);
-        this.sort(a,j+1,hi);
+        return i;
     }
 
     @Test
     public void init(){
-        Comparable[] a={10,40,30,20,45,55,66};
-        this.sort(a);
-        this.show(a);
+        int[] a = {1,5,8,7,10,11};
+        quickSort(a,a.length);
+        Assert.assertNotNull(a);
     }
 }

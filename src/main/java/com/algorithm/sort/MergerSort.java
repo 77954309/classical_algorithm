@@ -1,93 +1,101 @@
 package com.algorithm.sort;
 
-import com.algorithm.sort.model.Example;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
+ * @Classname MergerSort2
+ * @Description TODO
+ * @Date 2020/8/3 20:32
+ * @Created by limeng
  * 归并
- *
- * @author limeng
- * @create 2018-12-21 上午10:33
- **/
-public class MergerSort extends Example {
+ */
+public class MergerSort {
 
-    private Comparable[] aux;
+    public void mergeSort(int[] a,int n){
+        mergeSortInternally(a,0,n-1);
+    }
 
-    /**
-     * 归并
-     * 自顶向下
-     * @param a
-     */
-    @Override
-    protected void sort(Comparable[] a) {
-        aux = new Comparable[a.length];
-        this.sort(a,0,a.length-1);
+    //递归调用函数
+    private void mergeSortInternally(int[] a,int p,int r){
+        //递归终止条件
+        if(p >= r) return;
+
+        //取p到r之间的中间位置q,防止（p+r）超过int类型最大值
+        int q = p + (r - p)/2;
+        mergeSortInternally(a,p,q);
+        mergeSortInternally(a,q+1,r);
+
+        //
+        merge(a,p,q,r);
+       // mergeBySentry(a,p,q,r);
     }
 
 
-    protected void sort(Comparable[] a,int lo,int hi){
-        if(hi <= lo) return;
-        int mid = lo + (hi - lo)/2;
 
-        this.sort(a,lo,mid);//左
-        this.sort(a,mid+1,hi);//右
-        this.merge(a,lo,mid,hi);
-    }
-
-    /**
-     * 归并
-     * 自底向上
-     *
-     */
-    protected void sortUp(Comparable[] a){
-        int length = a.length;
-        aux = new Comparable[length];
-
-        for (int i = 1; i < length; i+=i) {
-            for (int j = 0; j < length-i; j+=i+i) {
-                this.merge(a,j,j+i-1,Math.min(j+i+i-1,length-1));
+    private void merge(int[] a,int p,int q,int r){
+        int i = p;
+        int j = q+1;
+        int k = 0; //初始化变量i,j,k
+        int[] tmp = new int[r-p+1]; //申请
+        while (i <= q && j <= r){
+            if(a[i] <= a[j]){
+                tmp[k++] = a[i++];
+            }else{
+                tmp[k++] = a[j++];
             }
         }
-    }
 
-
-
-
-
-    /**
-     * 合并子数组
-     * @param a
-     * @param lo 开始
-     * @param mid 中间
-     * @param hi 结尾
-     */
-    protected void merge(Comparable[] a,int lo,int mid,int hi){
-
-        /**
-         * i左部分
-         * j右部分
-         */
-        int i=lo;
-        int j=mid+1;
-        for (int k = lo; k <= hi; k++) {
-            aux[k] = a[k];
+        //判断哪个子数组中有剩余数据
+        int start = i;
+        int end = q;
+        if(j <= r){
+            start = j;
+            end = r;
         }
 
-        /**
-         * 子序列
-         * i 左边用尽，取右边
-         * j 右边用尽，取左边
-         * j i比大小   j小  赋值k数值 ，反之亦然
-         */
-        for (int k = lo; k <= hi; k++) {
-            if(i > mid){
-                a[k] = aux[j++];
-            }else if(j > hi){
-                a[k] = aux[i++];
-            }else if(this.less(aux[j],aux[i])){
-                a[k] = aux[j++];
-            }else {
-                a[k] = aux[i++];
+        //将剩余的数据拷贝到临时数组tmp
+        while (start <= end){
+            tmp[k++] = a[start++];
+        }
+
+        for (i = 0; i <= r-p ; i++) {
+            a[p+i] = tmp[i];
+        }
+    }
+
+    /**
+     * 合并（哨兵）
+     * @param arr
+     * @param p
+     * @param q
+     * @param r
+     */
+    private void mergeBySentry(int[] arr,int p,int q,int r){
+        int[] leftArr = new int[q - p + 2];
+        int[] rightArr = new int[r - q + 1];
+
+        for (int i = 0; i <= q - p ; i++) {
+            leftArr[i] = arr[p+i];
+        }
+
+        //第一个数组添加哨兵（最大值）
+        leftArr[q - p +1] = Integer.MAX_VALUE;
+
+        for (int i = 0; i < r - q; i++) {
+            rightArr[i] = arr[q+i + 1];
+        }
+
+        rightArr[r - q] = Integer.MAX_VALUE;
+
+        int i = 0;
+        int j = 0;
+        int k = p;
+        while (k <= r){
+            if(leftArr[i] <= rightArr[j]){
+                arr[k++] = leftArr[i++];
+            }else{
+                arr[k++] = rightArr[j++];
             }
         }
 
@@ -95,13 +103,9 @@ public class MergerSort extends Example {
 
     @Test
     public void init(){
-        Comparable[] a={10,40,30,2};
-        /*this.sort(a);
-        this.show(a);*/
-
-
-        this.sortUp(a);
-        this.show(a);
+        int[] a = {1,5,6,7,10,11};
+        mergeSort(a,a.length);
+        Assert.assertNotNull(a);
     }
 
 }
