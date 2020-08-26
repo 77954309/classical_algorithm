@@ -10,7 +10,8 @@ import org.junit.Test;
  * @Created by limeng
  * 桶排序
  * 要排序的数据需要很容易能划分m个桶，并且桶与桶之间有着天然的大小顺序，这样每个桶内数据排序完之后，桶与桶之间数据不需要再排序
- *
+ *  分布均匀，划分很大占用内存
+ *  桶排序适合外部排序（外部磁盘）
  */
 public class BucketSort {
 
