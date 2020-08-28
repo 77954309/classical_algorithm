@@ -16,17 +16,41 @@ public class BinaryFind2 {
      */
     @Test
     public void testBinarySqrt(){
-       // sqrt(16);
-        int[] a=new int[]{1,3,10,11,12,14,24,25};
-        int v=14;
+        sqrt(16,0.000001);
+//        int[] a=new int[]{1,3,10,11,12,14,24,25};
+//        int v=14;
         //testBinary(a,v);
         //testBinaryFirstValue(a,v);
         //testBinaryTailValue(a,v);
 
         //testBinaryMoreValue(a,v);
-        testBinaryLessValue(a,v);
+        //testBinaryLessValue(a,v);
     }
 
+    public  void sqrt(double x, double precision) {
+        if (x < 0) {
+            return ;
+        }
+        double low = 0;
+        double up = x;
+        if (x < 1 && x > 0) {
+            /** 小于1的时候*/
+            low = x;
+            up = 1;
+        }
+        double mid = low + (up - low)/2;
+        while(up - low > precision) {
+            if (mid * mid > x ) {//TODO mid可能会溢出
+                up = mid;
+            } else if (mid * mid < x) {
+                low = mid;
+            } else {
+                break;
+            }
+            mid = low + (up - low)/2;
+        }
+        Assert.assertNotNull(mid);
+    }
 
     public void sqrt(int x){
         double lo=1;
@@ -49,9 +73,7 @@ public class BinaryFind2 {
             mid =(hi+lo)/2;
 
         }
-
         Assert.assertNotNull(mid);
-
     }
 
     /**
