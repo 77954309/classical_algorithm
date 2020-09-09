@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Random;
 
 /**
- * https://blog.csdn.net/gloomysnow/article/details/51510203
+ *
  * 跳表
  * @Author: limeng
  * @Date: 2019/9/29 18:49
@@ -15,11 +15,44 @@ public class JumpTable {
     private static final int MAX_LEVEL = 16;
     private int levelCount = 1;
     private Random r = new Random();
-    private Node head =new Node();
+    private Node head =new Node(MAX_LEVEL);
+
+    public void insert2(int value){
+        int level = head.forwards[0] == null ? 1:randomLevel();
+        //每次只增加一层
+        if(level > levelCount){
+            level = ++levelCount;
+        }
+        Node newNode = new Node(level);
+        newNode.data = value;
+        //表示从最大层到低层，都要有节点数据
+        newNode.maxLevel = level;
+        Node p = head;
+
+        //从最大层次开始找
+        for (int i = levelCount-1; i >= 0 ; --i) {
+            while (p.forwards[i] != null && p.forwards[i].data < value){
+                p = p.forwards[i];
+            }
+
+            //levelCount
+            if(level > i){
+                if(p.forwards[i] == null){
+                    p.forwards[i] = newNode;
+                }else{
+                    Node next = p.forwards[i];
+                    p.forwards[i] = newNode;
+                    newNode.forwards[i] = next;
+                }
+            }
+        }
+
+    }
+
 
     public void  insert(int value){
         int level=randomLevel();
-        Node newNode = new Node();
+        Node newNode = new Node(level);
         newNode.data = value;
         newNode.maxLevel = level;
         Node update[] = new Node[level];
@@ -97,8 +130,13 @@ public class JumpTable {
 
     public class Node{
        private int data = -1;
-       private Node forwards[]=new Node[MAX_LEVEL];
+       private Node forwards[];
        private int maxLevel = 0;
+
+
+        public Node(int level) {
+            forwards = new Node[level];
+        }
 
         @Override
         public String toString() {
@@ -123,14 +161,14 @@ public class JumpTable {
     }
     @Test
     public void testValue(){
-        insert(1);
-        insert(12);
-        insert(14);
-        insert(5);
-        insert(15);
-        insert(89);
+        insert2(1);
+        insert2(12);
+        insert2(14);
+        insert2(5);
+        insert2(15);
+        insert2(89);
 
-        find(15);
+        find(89);
         //printAll();
     }
 
