@@ -2,6 +2,7 @@ package com.algorithm.structure.chart;
 
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -15,6 +16,7 @@ public class JumpTable {
     private static final int MAX_LEVEL = 16;
     private int levelCount = 1;
     private Random r = new Random();
+
     private Node head =new Node(MAX_LEVEL);
 
     public void insert2(int value){
