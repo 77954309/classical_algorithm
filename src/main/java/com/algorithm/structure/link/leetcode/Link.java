@@ -168,6 +168,72 @@ public class Link {
         return null;
     }
 
+    /**
+     * 给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。
+     *
+     * k 是一个正整数，它的值小于或等于链表的长度。
+     *
+     * 如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。
+     *
+     *  给你这个链表：1->2->3->4->5
+     *
+     * 当 k = 2 时，应当返回: 2->1->4->3->5
+     *
+     * 当 k = 3 时，应当返回: 3->2->1->4->5
+     *
+     *
+     * @param
+     * @param k
+     */
+    private void reverseKGroup(int k){
+        ListNode hair = new ListNode(0);
+        ListNode head2 = head;
+
+        hair.setNext(head2);
+        ListNode pre = hair;
+
+        while (head2 != null) {
+            ListNode tail = pre;
+            // 查看剩余部分长度是否大于等于 k
+            for (int i = 0; i < k; ++i) {
+                tail = tail.getNext();
+                if (tail == null) {
+                    System.out.println(hair.getNext());
+                    break;
+
+                }
+            }
+            ListNode nex = tail.getNext();
+            ListNode[] reverse = myReverse(head2, tail);
+            head2 = reverse[0];
+            tail = reverse[1];
+            // 把子链表重新接回原链表
+            pre.setNext(head2);
+            tail.setNext(nex);
+            pre = tail;
+            head2 = tail.getNext();
+        }
+
+        System.out.println(hair.getNext());
+
+    }
+
+    /**
+     * 反转
+     */
+    private ListNode[] myReverse(ListNode curr,ListNode tail){
+        ListNode prev = tail.next;
+        ListNode p = curr;
+        while (prev != tail) {
+            ListNode nex = p.next;
+            p.next = prev;
+            prev = p;
+            p = nex;
+        }
+        return new ListNode[]{tail, curr};
+    }
+
+
     @Test
     public void init(){
         insert(1);
@@ -180,7 +246,9 @@ public class Link {
        // reverseList3();
         //swapPairs();
         //System.out.println(head);
-        ringLink();
+        //ringLink();
+
+        reverseKGroup(2);
     }
 
     @Data
