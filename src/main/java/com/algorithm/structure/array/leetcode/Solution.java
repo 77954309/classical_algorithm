@@ -2,8 +2,7 @@ package com.algorithm.structure.array.leetcode;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Classname Solution
@@ -13,6 +12,32 @@ import java.util.List;
  */
 public class Solution {
 
+    /**
+     * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+     *
+     * 有效字符串需满足：
+     *
+     * 左括号必须用相同类型的右括号闭合。
+     * 左括号必须以正确的顺序闭合。
+     * 注意空字符串可被认为是有效字符串。
+     *
+     *
+     * @return
+     */
+    public void isValid(String s) {
+        boolean result = false;
+        if(s.isEmpty() || (s.length() & 1) > 0) result = false;
+
+        Stack<Character> stack = new Stack<>();
+        for(char c : s.toCharArray()){
+            if(c == '[') stack.push(']');
+            else if(c == '(') stack.push(')');
+            else if(c == '{') stack.push('}');
+            else if(stack.isEmpty() || c != stack.pop()) result = false;
+        }
+        result = stack.isEmpty();
+        System.out.println(result);
+    }
 
     private void largeGroupPositions2(String s) {
         List<List<Integer>> lists = new ArrayList<>();
@@ -88,7 +113,9 @@ public class Solution {
     }
     @Test
     public void init(){
-        largeGroupPositions2("aaaa");
+       // largeGroupPositions2("aaaa");
+
+        isValid("{[]}");
     }
 
 }

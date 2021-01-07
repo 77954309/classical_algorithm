@@ -1,5 +1,7 @@
 package com.algorithm.structure.queue.leetcode;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -7,13 +9,13 @@ import java.util.Stack;
  * @Description TODO
  * @Date 2021/1/4 20:23
  * @Created by limeng
- * 用栈实现队列
+ * 用队列实现栈
  */
 public class MyQueue {
-    //
-    Stack<Integer> s1= new Stack<>();
-    Stack<Integer> s2= new Stack<>();
-    int front;
+
+    Queue<Integer> s1= new LinkedList<>();
+    Queue<Integer> s2= new LinkedList<>();
+
     public MyQueue() {
 
     }
@@ -23,9 +25,16 @@ public class MyQueue {
      * @param x
      */
     public void  push(int x){
-        if (s1.empty())
-            front = x;
-        s1.push(x);
+
+        while (!s1.isEmpty()){
+            s2.offer(s1.poll());
+        }
+
+        s1.offer(x);
+
+        while (!s2.isEmpty()){
+            s1.offer(s2.poll());
+        }
     }
 
     /**
@@ -33,12 +42,8 @@ public class MyQueue {
      * @return
      */
     public int pop(){
-        if (s2.isEmpty()) {
-            while (!s1.isEmpty()) {
-                s2.push(s1.pop());
-            }
-        }
-        return s2.pop();
+
+        return s1.poll();
     }
 
     /**
@@ -46,10 +51,7 @@ public class MyQueue {
      * @return
      */
     public int peek(){
-        if (!s2.isEmpty()) {
-            return s2.peek();
-        }
-        return front;
+        return s1.peek();
     }
 
     /**
@@ -57,7 +59,7 @@ public class MyQueue {
      * @return
      */
     public boolean empty(){
-        return s1.isEmpty() && s2.isEmpty();
+        return !s1.isEmpty() && !s2.isEmpty();
     }
 
     public static void main(String[] args) {
