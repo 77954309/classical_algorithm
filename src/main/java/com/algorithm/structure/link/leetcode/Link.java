@@ -88,6 +88,18 @@ public class Link {
 
         System.out.println(prev.getNext());
     }
+    //1 2 3 4
+    public ListNode swapPairs2(ListNode h) {
+        if (h == null || h.next == null) {
+            return h;
+        }
+        ListNode newHead = h.next;
+        h.next = swapPairs2(newHead.next);
+        newHead.next = h;
+        return newHead;
+    }
+
+
 
     public void ringLink(){
         ListNode node = head;
@@ -185,7 +197,7 @@ public class Link {
      * @param
      * @param k
      */
-    private void reverseKGroup(int k){
+    public void reverseKGroup(int k){
         ListNode hair = new ListNode(0);
         ListNode head2 = head;
 
@@ -247,8 +259,8 @@ public class Link {
         //swapPairs();
         //System.out.println(head);
         //ringLink();
-
-        reverseKGroup(2);
+        //swapPairs2(head);
+       reverseKGroup(2);
     }
 
     @Data
