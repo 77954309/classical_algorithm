@@ -102,6 +102,7 @@ public class maxSlidingWindowTest {
                 deque.pollLast();
             }
             deque.offerLast(i);
+            //滑动窗口
             while (deque.peekFirst() <= i - k) {
                 deque.pollFirst();
             }
@@ -111,7 +112,7 @@ public class maxSlidingWindowTest {
     }
 
     public static void main(String[] args) {
-        int[] s= new int[]{1,3,-1,-3,5,3,6,7};
+        int[] s= new int[]{1,3,10,-3,5,3,6,7};
         maxSlidingWindowTest.maxSlidingWindow2(s,3);
     }
 

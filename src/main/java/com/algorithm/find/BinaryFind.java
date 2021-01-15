@@ -18,8 +18,8 @@ public class BinaryFind  {
 
     public void  binary(int[] a,int value){
         int binary = binary(a, a.length, value);
-        int binaryDiGui = binaryDiGui(a, 0, a.length, value);
-        System.out.println(binaryDiGui);
+//        int binaryDiGui = binaryDiGui(a, 0, a.length, value);
+//        System.out.println(binaryDiGui);
     }
 
     /**
@@ -43,6 +43,7 @@ public class BinaryFind  {
                 break;
             }
         }
+
         return mid;
     }
 
@@ -176,12 +177,12 @@ public class BinaryFind  {
     @Test
     public void init(){
         int[] a ={1,23,25,67,67,67,70,71,72};
-        //binary(a,45);
+        binary(a,45);
         //int mid = binaryByFirst(a, a.length-1, 67);
         //int mid = binaryByEnd(a, a.length-1, 67);
         //int i = binaryByFirstBig(a, a.length - 1, 67);
-        int i = binaryByEndBig(a, a.length - 1, 1);
-        System.out.printf("mid "+i+"\n");
+//        int i = binaryByEndBig(a, a.length - 1, 1);
+//        System.out.printf("mid "+i+"\n");
     }
 
 
