@@ -13,6 +13,60 @@ import java.util.*;
 public class Solution {
 
 
+    public int[][] generateMatrix2(int n) {
+        int[][] resultMatrix = new int[n][n];
+
+        // 计算结果值
+        int resultNum = n * n;
+        int insertNum = 1;
+
+        int rowStart = 0;
+        int rowEnd = n - 1;
+        int columnStart = 0;
+        int columnEnd = n - 1;
+
+        while (insertNum <= resultNum){
+
+            //上
+            int columnTmp = columnStart;
+            while (columnTmp <= columnEnd){
+                resultMatrix[rowStart][columnTmp] = insertNum;
+                insertNum += 1;
+                columnTmp += 1;
+            }
+            rowStart +=1;
+
+            //右
+            int rowTmp = rowStart ;
+            while (rowTmp <= rowEnd){
+                resultMatrix[rowTmp][columnEnd] = insertNum;
+                insertNum += 1;
+                rowTmp += 1;
+            }
+            columnEnd -=1;
+
+            //下
+            columnTmp = columnEnd;
+            while (columnTmp >= columnStart && rowEnd>=rowStart){
+                resultMatrix[rowEnd][columnTmp] = insertNum;
+                insertNum +=1;
+                columnTmp -=1;
+            }
+            rowEnd -= 1;
+
+            //左
+            rowTmp = rowEnd;
+            while (rowTmp >= rowStart && columnEnd >= columnStart){
+                resultMatrix[rowTmp][columnStart] = insertNum;
+                insertNum +=1;
+                rowTmp -= 1;
+            }
+            columnStart +=1;
+        }
+
+
+        return resultMatrix;
+    }
     /**
      * 给定一个正整数 n，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。
      * 输入: 3
@@ -464,12 +518,15 @@ public class Solution {
 
      //   minSubArrayLen(11,new int[]{1,2,3,4,5});
 
-        minSubArrayLen2(15,new int[]{5,1,3,5,10,7,4,9,2,8});
+      //  minSubArrayLen2(15,new int[]{5,1,3,5,10,7,4,9,2,8});
 
         //7
         //[2,3,1,2,4,3]
 
        // minSubArrayLen2(7,new int[]{2,3,1,2,4,3});
+
+
+        generateMatrix2(3);
     }
 
 }
