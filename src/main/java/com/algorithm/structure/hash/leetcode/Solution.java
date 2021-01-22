@@ -17,8 +17,75 @@ public class Solution {
        // isAnagram("cd","ab");
       //  groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"});
 
-        twoSum2(new int[]{3,2,3},6);
+      //  twoSum2(new int[]{3,2,3},6);
+
+      //  threeSum(new int[]{-2,0,1,1,2});
+
+       // HashMap<String,String> map1 = new HashMap<>();
+        threeSum(new int[]{-1,0,1,2,-1,-4});
     }
+
+    /**
+     * 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
+     *
+     * 注意：答案中不可以包含重复的三元组。
+     *
+     * 示例 1：
+     *
+     * 输入：nums = [-1,0,1,2,-1,-4]
+     * 输出：[[-1,-1,2],[-1,0,1]]
+     * 示例 2：
+     *
+     * 输入：nums = []
+     * 输出：[]
+     * 示例 3：
+     *
+     * 输入：nums = [0]
+     * 输出：[]
+     *  
+     * 提示：
+     * 0 <= nums.length <= 3000
+     * -105 <= nums[i] <= 105
+     *
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        int l = nums.length;
+        Arrays.sort(nums);
+        HashMap<Integer, Integer> map2 = new HashMap<>();
+
+        HashMap<String, List<Integer>> map1 = new HashMap<>();
+        for (int i = 0; i < l; i++) {
+            int third = l-1;
+            for (int j = i+1; j < l; j++) {
+                if(map2.containsKey(0-(nums[i]+nums[j]))){
+                    int k = map2.get(0-(nums[i]+nums[j]));
+                    if(k == i || k == j){
+                        continue;
+                    }
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[i]);
+                    list.add(nums[j]);
+                    list.add(nums[k]);
+                    Collections.sort(list);
+                    String key = list.toString();
+                    if(!map1.containsKey(key)){
+                        map1.put(key,list);
+                    }
+
+                }
+                if(!map2.containsKey(nums[j])){
+                    map2.put(nums[j],j);
+                }
+            }
+
+        }
+        System.out.println(map1);
+        return null;
+    }
+
 
     public int[] twoSum2(int[] nums, int target) {
         HashMap<Integer, Integer> map = new HashMap<>();
