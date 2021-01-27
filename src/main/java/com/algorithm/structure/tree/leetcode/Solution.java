@@ -3,6 +3,8 @@ package com.algorithm.structure.tree.leetcode;
 
 import org.junit.Test;
 
+import java.util.*;
+
 /**
  * @Classname Solution
  * @Description TODO
@@ -21,13 +23,78 @@ public class Solution {
         insertBinaryTree(0);
         insertBinaryTree(8);
 
-        TreeNode leftNode = new TreeNode(0);
-        TreeNode rightNode = new TreeNode(2);
-        TreeNode treeNode = lowestCommonAncestor(root, leftNode, rightNode);
-        System.out.println(treeNode);
+//        TreeNode leftNode = new TreeNode(0);
+//        TreeNode rightNode = new TreeNode(2);
+//        TreeNode treeNode = lowestCommonAncestor(root, leftNode, rightNode);
+//        System.out.println(treeNode);
         //isPre(root,treeNode);
 
+       // leveOrder(root);
+        //isValidBST();
+
+
     }
+
+    /**
+     * 给定一个二叉树，判断其是否是一个有效的二叉搜索树。
+     *
+     * 假设一个二叉搜索树具有如下特征：
+     *
+     * 节点的左子树只包含小于当前节点的数。
+     * 节点的右子树只包含大于当前节点的数。
+     * 所有左子树和右子树自身必须也是二叉搜索树。
+     *
+     * 输入:
+     *     5
+     *    / \
+     *   1   4
+     *      / \
+     *     3   6
+     * 输出: false
+     * 解释: 输入为: [5,1,4,null,null,3,6]。
+     *      根节点的值为 5 ，但是其右子节点值为 4 。
+     *
+     *
+     */
+    public boolean isValidBST(){
+        Deque<TreeNode> stack = new LinkedList<TreeNode>();
+        double inorder = -Double.MAX_VALUE;
+
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            // 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
+            if (root.val <= inorder) {
+                return false;
+            }
+            inorder = root.val;
+            root = root.right;
+        }
+        return true;
+
+    }
+
+    public void leveOrder(TreeNode root){
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()){
+            TreeNode poll = queue.poll();
+            System.out.println(poll.val);
+            if(poll.left != null){
+                queue.offer(poll.left);
+            }
+
+            if(poll.right != null){
+                queue.offer(poll.right);
+            }
+
+        }
+    }
+
 
     public void insertBinaryTree(int valData){
         if(root == null){
@@ -55,6 +122,44 @@ public class Solution {
             }
         }
     }
+
+    /**
+     * 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        HashSet<Integer> visited = new HashSet<>();
+        HashMap<Integer,TreeNode> map = new HashMap<>();
+        lowestCommonAncestorDfs(root,map);
+        while (p != null){
+            visited.add(p.val);
+            p = map.get(p.val);
+        }
+
+        while (q != null){
+           if(visited.contains(q.val)){
+               return q;
+           }
+           q = map.get(q.val);
+        }
+        return null;
+    }
+
+    public void lowestCommonAncestorDfs(TreeNode root, HashMap<Integer,TreeNode> map){
+        while (root.left != null){
+            map.put(root.left.val,root);
+            lowestCommonAncestorDfs(root.left,map);
+        }
+
+        while (root.right != null){
+            map.put(root.right.val,root);
+            lowestCommonAncestorDfs(root.right,map);
+        }
+    }
+
     /**
      * 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
      *
