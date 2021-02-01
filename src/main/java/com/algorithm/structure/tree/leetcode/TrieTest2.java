@@ -10,25 +10,27 @@ import org.junit.Test;
  * @Created by limeng
  */
 public class TrieTest2 {
-    private TrieTest2 root = null;
-    private char data;
-    private TrieTest2 children[] = new TrieTest2[26];
-    private boolean isEndingChar=false;
+    private TrieNode root = new TrieNode('/');
 
-    public TrieTest2() {
-        root = new TrieTest2('/');
+    class TrieNode{
+        public char data;
+        public TrieNode children[] = new TrieNode[26];
+        public boolean isEndingChar=false;
+
+        public TrieNode(char data) {
+            this.data = data;
+        }
     }
 
-    public TrieTest2(char data) {
-        this.data = data;
-    }
+
 
     public void insert(String word){
-        TrieTest2 p = this.root;
+        TrieNode p = this.root;
         for (int i = 0; i < word.length(); i++) {
             int index = word.charAt(i) - 'a';
             if(p.children[index] == null){
-                TrieTest2 newTrieNode = new TrieTest2(word.charAt(i));
+
+                TrieNode newTrieNode = new TrieNode(word.charAt(i));
                 p.children[index] = newTrieNode;
             }
             p = p.children[index];
@@ -37,7 +39,7 @@ public class TrieTest2 {
     }
 
     public boolean search(String word){
-        TrieTest2 p = this.root;
+        TrieNode p = this.root;
         for (int i = 0; i < word.length(); i++) {
             int index = word.charAt(i) - 'a';
             if(p.children[index] == null){
@@ -52,7 +54,7 @@ public class TrieTest2 {
     }
 
     public boolean startsWith(String prefix){
-        TrieTest2 p = this.root;
+        TrieNode p = this.root;
 
         for (int i = 0; i < prefix.length(); i++) {
             int index = prefix.charAt(i) - 'a';
