@@ -55,18 +55,31 @@ public class TrieTest {
         else  return true;
     }
 
+    public boolean startsWith(char[] prefix){
+        TrieNode p = root;
+        boolean reslut = true;
+        for (int i = 0; i < prefix.length; i++) {
+            int index = prefix[i] - 'a';
+            if(p.children[index] == null){
+                reslut = false;
+            }
+            p = p.children[index];
+        }
+
+        return reslut;
+    }
 
 
     @Test
     public void init(){
-//        char[] c1={'h','e','l','l','o'};
-//        char[] c2={'h','o','w'};
-//        char[] c3={'s','e','e'};
-//        char[] c4={'s','o'};
-//        this.insert(c1);
-//        this.insert(c2);
-//        this.insert(c3);
-//        this.insert(c4);
+        char[] c1={'h','e','l','l','o'};
+        char[] c2={'h','o','w'};
+        char[] c3={'s','e','e'};
+        char[] c4={'s','o'};
+        this.insert(c1);
+        this.insert(c2);
+        this.insert(c3);
+        this.insert(c4);
 
 //        this.find(new char[]{'h','o'});
 
