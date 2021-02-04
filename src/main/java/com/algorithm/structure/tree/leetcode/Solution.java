@@ -15,13 +15,20 @@ public class Solution {
     private TreeNode root;
     @Test
     public void init(){
+//        insertBinaryTree(3);
+//        insertBinaryTree(5);
+//        insertBinaryTree(1);
+//        insertBinaryTree(6);
+//        insertBinaryTree(2);
+//        insertBinaryTree(0);
+//        insertBinaryTree(8);
+
         insertBinaryTree(3);
-        insertBinaryTree(5);
-        insertBinaryTree(1);
-        insertBinaryTree(6);
-        insertBinaryTree(2);
-        insertBinaryTree(0);
-        insertBinaryTree(8);
+        insertBinaryTree(9);
+        insertBinaryTree(20);
+        insertBinaryTree(15);
+        insertBinaryTree(7);
+        maxDepth(root);
 
 //        TreeNode leftNode = new TreeNode(0);
 //        TreeNode rightNode = new TreeNode(2);
@@ -33,6 +40,32 @@ public class Solution {
         //isValidBST();
 
 
+    }
+
+    /**
+     * 给定一个二叉树，找出其最大深度。
+     *
+     * 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+     *
+     * 说明: 叶子节点是指没有子节点的节点。
+     * @param root
+     * @return
+     */
+    public int maxDepth(TreeNode root) {
+        if(root == null) return 0;
+        int depth = maxDepth(root, 0);
+        return depth;
+    }
+
+    public int maxDepth(TreeNode root,int depth) {
+        if(root == null){
+            return depth;
+        }
+
+        int lm = maxDepth(root.left, depth + 1);
+        int rm = maxDepth(root.right, depth + 1);
+
+        return Math.max(lm,rm);
     }
 
     /**
@@ -75,6 +108,43 @@ public class Solution {
         }
         return true;
 
+    }
+
+    /**
+     * 层序遍历
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        if(root == null) return list;
+
+        List<Integer> childs = null;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+
+        while (!queue.isEmpty()){
+            childs = new ArrayList<>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode poll = queue.poll();
+                childs.add(poll.val);
+                if(poll.left != null){
+                    queue.offer(poll.left);
+                }
+
+                if(poll.right != null){
+                    queue.offer(poll.right);
+                }
+            }
+
+            list.add(childs);
+
+        }
+
+        return list;
     }
 
     public void leveOrder(TreeNode root){
