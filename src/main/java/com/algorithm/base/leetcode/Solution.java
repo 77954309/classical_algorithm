@@ -2,7 +2,7 @@ package com.algorithm.base.leetcode;
 
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * @Classname Solution
@@ -15,10 +15,147 @@ public class Solution {
     public void init(){
 
         //double v = myPow(2, 4);
-        int r = majorityElement(new int[]{1});
-        System.out.println(r);
+//        int r = majorityElement(new int[]{1});
+//        System.out.println(r);
+
+        //maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4});
+        //findAnagrams("abab","ab");
+
 
     }
+
+    /**
+     * 查找数组中最大值
+     *  int[] arrays = {2, 3, 4, 5, 1, 5, 2, 9, 5, 6, 8, 3, 1};
+     * @param arrays
+     * @return
+     */
+    public int findMax(int[] arrays){
+        return findMax(arrays,0,arrays.length - 1);
+    }
+
+    public  int findMax(int[] arrays, int L, int R) {
+        if(L == R) return arrays[L];
+        else{
+            int a = arrays[L];
+            int b = findMax(arrays,L+1,R);
+
+            if(a > b){
+                return a;
+            }else{
+                return b;
+            }
+        }
+    }
+
+
+
+        /**
+         * 给定一个字符串 s 和一个非空字符串 p，找到 s 中所有是 p 的字母异位词的子串，返回这些子串的起始索引。
+         *
+         * 字符串只包含小写英文字母，并且字符串 s 和 p 的长度都不超过 20100。
+         *
+         * 说明：
+         *
+         * 字母异位词指字母相同，但排列不同的字符串。
+         * 不考虑答案输出的顺序。
+         *
+         *  示例 2:
+         *
+         * 输入:
+         * s: "abab" p: "ab"
+         *
+         * 输出:
+         * [0, 1, 2]
+         *
+         * 解释:
+         * 起始索引等于 0 的子串是 "ab", 它是 "ab" 的字母异位词。
+         * 起始索引等于 1 的子串是 "ba", 它是 "ab" 的字母异位词。
+         * 起始索引等于 2 的子串是 "ab", 它是 "ab" 的字母异位词。
+         * 中等难度
+         * @param s
+         * @param p
+         * @return
+         */
+    public List<Integer> findAnagrams(String s, String p) {
+        if(s.length() < p.length()) return Collections.emptyList();
+
+        ArrayList<Integer> res = new ArrayList<>();
+        int[] need = new int[128];
+        for (char c:p.toCharArray()){
+            need[c]++;
+        }
+        int left = 0,right = 0;
+        int valid = 0;
+
+        while (right < s.length()){
+            char c = s.charAt(right);
+            if(need[c] > 0){
+                valid++;
+            }
+
+            need[c]--;
+
+            if(valid == p.length()){
+                while (need[s.charAt(left)] < 0){
+                    need[s.charAt(left)]++;
+                    left++;
+                }
+
+                if(right - left + 1 == valid){
+                    res.add(left);
+                }
+
+                need[s.charAt(left)]++;
+                valid--;
+                left++;
+            }
+            right++;
+
+        }
+
+        return res;
+    }
+    
+    /**
+     * 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+     * 示例 1：
+     *
+     * 输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
+     * 输出：6
+     * 解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
+     * 示例 2：
+     *
+     * 输入：nums = [1]
+     * 输出：1
+     * 示例 3：
+     *
+     * 输入：nums = [0]
+     * 输出：0
+     * 示例 4：
+     *
+     * 输入：nums = [-1]
+     * 输出：-1
+     * 示例 5：
+     *
+     * 输入：nums = [-100000]
+     * 输出：-100000
+     *
+     * @param nums
+     * @return
+     */
+    public int maxSubArray(int[] nums) {
+        int pre = 0;
+        int maxAns = nums[0];
+
+        for (int x:nums) {
+            pre = Math.max(pre+x , x);
+            maxAns = Math.max(maxAns,pre);
+        }
+        return maxAns;
+
+    }
+
 
 
     /**
